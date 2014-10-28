@@ -14,6 +14,8 @@ public class AlaCarte extends Item {
 		this.type = type;
 	}
 	public AlaCarte copy() {
-		return new AlaCarte(name, price, description, type);
+		AlaCarte ac = new AlaCarte(name, price, description, type);
+		ac.setId(this.id); // Since ID is not set in the constructor (purpose: to assign unique ID when an AlaCarte is created)
+		return ac;
 	}
 }
