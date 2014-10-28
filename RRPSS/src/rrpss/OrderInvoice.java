@@ -112,8 +112,8 @@ public class OrderInvoice
 		}
 		for (SetPackage sp: order.getSetPackages().keySet().toArray(new SetPackage[0])) {
 			ret += "[" + sp.getId() + "]  " + sp.getName() + "  " 
-					+ sp.getPrice() + " x" + order.getAlaCartes().get(sp) + " = "
-					+ sp.getPrice() * order.getAlaCartes().get(sp)
+					+ sp.getPrice() + " x" + order.getSetPackages().get(sp) + " = "
+					+ sp.getPrice() * order.getSetPackages().get(sp)
 					+ "\n";
 			
 		}

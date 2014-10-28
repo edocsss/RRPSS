@@ -45,8 +45,8 @@ public class RestaurantApp
 		
 		// Adding Set Package
 		sp = new SetPackage("Package A", 4.99, "Package A is delicious");
-		sp.addAlaCarte(menu.getAlaCarteById(101));
-		sp.addAlaCarte(menu.getAlaCarteById(102));
+		sp.addAlaCarte(menu.getAlaCarteById(1));
+		sp.addAlaCarte(menu.getAlaCarteById(2));
 		menu.addSetPackage(sp);
 		
 		// Adding Staffs
@@ -66,6 +66,8 @@ public class RestaurantApp
 		Customer customer;
 		Reservation reservation;
 		Calendar dateTime = new GregorianCalendar();
+		
+		menu.printMenu();
 		
 		do {
 			println("1. Create/Update/Remove menu item");
@@ -271,7 +273,10 @@ public class RestaurantApp
 				// Create new Order Object using OrderManager.createOrder (Calendar dateTime, Staff staff)
 				order = orderManager.createOrder(new GregorianCalendar(), staff);
 				
-				// (ask whether the customer wants to add an AlaCarte or a SetPackage) (?)
+				// TODO (ask whether the customer wants to add an AlaCarte or a SetPackage) (?)
+				
+				// TODO Print menu
+				menu.printMenu();
 				
 				// Get AlaCarte and SetPackage object using Menu.getAlaCarteById(id) and Menu.getSetPackageById(id)
 				// 		CHECK IF getAlaCarteById or getSetPackageById return NULL

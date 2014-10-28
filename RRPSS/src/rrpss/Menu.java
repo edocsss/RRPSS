@@ -37,11 +37,13 @@ public class Menu {
 		
 		return null;
 	}
-	public void addAlaCarte(AlaCarte a) {
-		a.setId(alaCartes.size() + setPackages.size() + 1);
+	public void addAlaCarte(AlaCarte ac) {
+		ac.setId(alaCartes.size() + setPackages.size() + 1);
+		alaCartes.add(ac);
 	}
-	public void addSetPackage(SetPackage s) {
-		s.setId(alaCartes.size() + setPackages.size() + 1);
+	public void addSetPackage(SetPackage sp) {
+		sp.setId(alaCartes.size() + setPackages.size() + 1);
+		setPackages.add(sp);
 	}
 	
 	public int removeAlaCarteById(int id) {
@@ -66,5 +68,22 @@ public class Menu {
 		}
 		
 		return -1;
+	}
+	
+	public void printMenu ()
+	{
+		//Something like toString -> like a breakdown of what has been ordered
+		for (AlaCarte ac: alaCartes) {
+			System.out.println(String.format("%-5s%-20s%-10.2f%-35s%-15s",
+					ac.id, ac.name, ac.price, ac.description, ac.getType()));
+		}
+		for (SetPackage sp: setPackages) {
+			System.out.println(String.format("%-5s%-20s%-10.2f%-25s",
+					sp.id, sp.name, sp.price, sp.description));
+			for (AlaCarte ac: sp.getAlaCartes()) {
+				System.out.println(String.format("%-5s%-5s%-25s%-35s%-15s",
+						" ", ac.id, ac.name, ac.description, ac.getType()));
+			}
+		}
 	}
 }
