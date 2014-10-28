@@ -57,7 +57,12 @@ public class Order
 	// Get OrderItem from the MainApp
 	public void addAlaCarte (AlaCarte alaCarte, int quantity)
 	{
-		this.alaCartes.put(alaCarte, quantity);
+		AlaCarte ac = getAlaCarteByItemId(alaCarte.getId());
+		if (ac != null) {
+			alaCartes.put(ac, alaCartes.get(ac) + quantity);
+		} else {
+			alaCartes.put(alaCarte, quantity);
+		}
 	}
 	
 	public void removeAlaCarte (AlaCarte alaCarte)
@@ -100,7 +105,12 @@ public class Order
 	
 	public void addSetPackage (SetPackage setPackage, int quantity)
 	{
-		this.setPackages.put(setPackage, quantity);
+		SetPackage sp = getSetPackageByItemId(setPackage.getId());
+		if (sp != null) {
+			setPackages.put(sp, setPackages.get(sp) + quantity);
+		} else {
+			setPackages.put(setPackage, quantity);
+		}
 	}
 	
 	public void removeSetPackage (SetPackage setPackage)
@@ -169,11 +179,11 @@ public class Order
 	{
 		//Something like toString -> like a breakdown of what has been ordered
 		for (AlaCarte ac: alaCartes.keySet().toArray(new AlaCarte[0])) {
-			System.out.println(String.format("%-5s%-15s%-5.2f x %-5d%5.2f",
+			System.out.println(String.format("%-5s%-20s @%-8.2f x%-5d = %-10.2f",
 					ac.id, ac.name, ac.price, alaCartes.get(ac), ac.price * alaCartes.get(ac)));
 		}
 		for (SetPackage sp: setPackages.keySet().toArray(new SetPackage[0])) {
-			System.out.println(String.format("%-5s%-15s%-5.2f x %-5d%5.2f",
+			System.out.println(String.format("%-5s%-20s%-8.2f x%-5d = %-10.2f",
 					sp.id, sp.name, sp.price, setPackages.get(sp), sp.price * setPackages.get(sp)));
 		}
 	}

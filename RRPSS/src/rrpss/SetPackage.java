@@ -23,6 +23,7 @@ public class SetPackage extends Item {
 	public SetPackage copy() {
 		SetPackage sp = new SetPackage(name, price, description);
 		sp.setAlaCartes(alaCartes);
+		sp.setId(id);
 		return sp;
 	}
 }

@@ -377,6 +377,7 @@ public class RestaurantApp
 					// 		Input alaCarteIds and setPackageIds
 					//		ac = Menu.getAlaCarteById(alaCarteIds); sp = Menu.getSetPackageById(setPackageIds)
 					//		Order.addAlaCarte(ac); Order.addSetPackage(sp)
+					
 					print("Input AlaCarte IDs and quantity (space-separated) | Enter -1 to end: ");
 					while (sc.hasNextInt()) {
 						id = sc.nextInt();
@@ -577,7 +578,7 @@ public class RestaurantApp
 				}
 				
 				// The table must be assigned to a customer in order to have an Order object
-				if (!table.getAvailability()) {
+				if (table.getAvailability()) {
 					println("Error: Table number: " + tableNum + " does not have customer!\n");
 					continue;
 				}

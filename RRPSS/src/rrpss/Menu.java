@@ -73,15 +73,19 @@ public class Menu {
 	public void printMenu ()
 	{
 		//Something like toString -> like a breakdown of what has been ordered
+		System.out.println("================================================================================");
+		System.out.println(String.format("%-5s%-20s%-10s%-30s%-15s",
+				"ID", "Name", "Price", "Description", "Type"));
+		System.out.println("================================================================================");
 		for (AlaCarte ac: alaCartes) {
-			System.out.println(String.format("%-5s%-20s%-10.2f%-35s%-15s",
+			System.out.println(String.format("%-5s%-20s%-10.2f%-30s%-15s",
 					ac.id, ac.name, ac.price, ac.description, ac.getType()));
 		}
 		for (SetPackage sp: setPackages) {
-			System.out.println(String.format("%-5s%-20s%-10.2f%-25s",
+			System.out.println(String.format("%-5s%-20s%-10.2f%-30s",
 					sp.id, sp.name, sp.price, sp.description));
 			for (AlaCarte ac: sp.getAlaCartes()) {
-				System.out.println(String.format("%-5s%-5s%-25s%-35s%-15s",
+				System.out.println(String.format("%-5s%-5s%-25s%-30s%-15s",
 						" ", ac.id, ac.name, ac.description, ac.getType()));
 			}
 		}
