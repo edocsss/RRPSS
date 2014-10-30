@@ -24,6 +24,7 @@ public class SetPackage extends Item {
 		SetPackage sp = new SetPackage(name, price, description);
 		sp.setAlaCartes(alaCartes);
 		sp.setId(this.id); // Since ID is not set in the constructor (purpose: to assign unique ID when a SetPackage is created)
+
 		return sp;
 	}
 }

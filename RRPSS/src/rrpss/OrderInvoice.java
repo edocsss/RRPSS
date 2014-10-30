@@ -94,34 +94,16 @@ public class OrderInvoice
 	public void printInvoice ()
 	{
 		//Print the order breakdown & dateTime from Order object
-		System.out.print(this.toString());
+		
+		System.out.println(String.format("Order Invoice #%d", order.getId()));
+		System.out.println(String.format("Table: %5d Date: %s",
+				tableNum, order.getDateTime().toString())); //TODO make it more readable
+		System.out.println(String.format("Order breakdown"));
+		order.printOrder();
+		System.out.println(String.format("%-25s: %5.2f", "Total price", this.totalPrice));
+		System.out.println(String.format("%-25s: %5.2f", "Membership discount", this.totalDiscount));
+		System.out.println(String.format("%-25s: %5.2f", "GST", this.totalGST));
+		System.out.println(String.format("%-25s: %5.2f", "Grand total", this.grandTotal));
 	}
 	
-	public String toString() {
-		String ret = "";
-		ret += "Order Invoice #" + order.getId() + "\n";
-		ret += "Table: " + tableNum + "\n";
-		ret += "Date: " + order.getDateTime().toString() + "\n"; //TODO make it more readable
-		ret += "Order breakdown: \n";
-		for (AlaCarte ac: order.getAlaCartes().keySet().toArray(new AlaCarte[0])) {
-			ret += "[" + ac.getId() + "]  " + ac.getName() + "  " 
-					+ ac.getPrice() + " x" + order.getAlaCartes().get(ac) + " = "
-					+ ac.getPrice() * order.getAlaCartes().get(ac)
-					+ "\n";
-			
-		}
-		for (SetPackage sp: order.getSetPackages().keySet().toArray(new SetPackage[0])) {
-			ret += "[" + sp.getId() + "]  " + sp.getName() + "  " 
-					+ sp.getPrice() + " x" + order.getSetPackages().get(sp) + " = "
-					+ sp.getPrice() * order.getSetPackages().get(sp)
-					+ "\n";
-			
-		}
-		ret += "Total price: " + this.totalPrice + "\n";
-		ret += "Membership discount: " + this.totalDiscount + "\n";
-		ret += "GST: " + this.totalGST + "\n";
-		ret += "Grand total: " + this.grandTotal + "\n";
-		
-		return ret;
-	}
 }
