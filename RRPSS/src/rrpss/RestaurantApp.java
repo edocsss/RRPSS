@@ -12,9 +12,11 @@ public class RestaurantApp
 	private static void print(Object line) {
 	    System.out.print(line);
 	}
+	
 	private static void println(Object line) {
 	    System.out.println(line);
 	}
+	
 	private static void println() {
 	    System.out.println();
 	}
@@ -54,7 +56,7 @@ public class RestaurantApp
 		staffManager.addStaff(new Staff("Deka", 124, "Female", "Founder 2"));
 		
 		// Variable Declaration
-		int choice = 0, subChoice = 0;
+		int choice = 0, subChoice = 0, subChoice2 = 0;
 		String name, description, type, membershipString, dateTimeString;
 		int id, tableNum, staffId, quantity, contact, numPeople, reservationId;
 		boolean membership;
@@ -67,6 +69,7 @@ public class RestaurantApp
 		Reservation reservation;
 		Calendar dateTime = new GregorianCalendar();
 		
+		// "Real" start of the application
 		menu.printMenu();
 		
 		do {
@@ -90,7 +93,7 @@ public class RestaurantApp
 			switch (choice) {
 			case 1: // Create/Update/Remove menu item
 				do {
-					println("\n1. Create menu item");
+					println("n1. Create menu item");
 					println("2. Update menu item");
 					println("3. Remove menu item");
 					println("4. Back");
@@ -110,7 +113,7 @@ public class RestaurantApp
 						print("Enter Ala Carte price: ");
 						price = sc.nextDouble();
 						
-						print("Enter Ala Carte description: ");
+						print("Enter Ala Carte description in one line: ");
 						description = sc.nextLine();
 						
 						print("Enter Ala Carte type: ");
@@ -126,7 +129,85 @@ public class RestaurantApp
 					// Update a particular Ala Carte object
 					case 2:
 						// Update -> switch () based on what is going to be updated
-						// TODO implement this!
+						menu.printMenu();
+						print("Enter the Ala Carte ID: ");
+						id = sc.nextInt();
+						
+						ac = menu.getAlaCarteById(id);
+						if (ac == null) {
+							println("Error: Ala Carte with ID: " + id + " does not exist!");
+							continue;
+						}
+						
+						do {
+							// Print sub menu
+							println("\n1. Update name");
+							println("2. Update price");
+							println("3. Update description");
+							println("4. Update type");
+							println("5. Update all fields"); // Rather than choosing 1 and then 2 etc.
+							println("6. Back");
+							print("Enter your choice: ");
+							subChoice2 = sc.nextInt();
+							sc.nextLine(); // "flush"
+							
+							switch (subChoice2) {
+							case 1:
+								print("Enter the new name: ");
+								name = sc.nextLine();
+								
+								ac.setName(name);
+								println("The name of Ala Carte with ID: " + id + " has been modified!");
+								break;
+								
+							case 2:
+								print("Enter the new price: ");
+								price = sc.nextDouble();
+								
+								ac.setPrice(price);
+								println("The price of Ala Carte with ID: " + id + " has been modified!");
+								break;
+								
+							case 3:
+								print("Enter the new description in one line: ");
+								description = sc.nextLine();
+								
+								ac.setDescription(description);
+								println("The description of Ala Carte with ID: " + id + " has been modified!");
+								break;
+								
+							case 4:
+								print("Enter the new type: ");
+								type = sc.nextLine();
+								
+								ac.setType(type);
+								println("The type of Ala Carte with ID: " + id + " has been modified!");
+								break;
+								
+							case 5:
+								print("Enter the new name: ");
+								name = sc.nextLine();
+								
+								print("Enter the new price: ");
+								price = sc.nextDouble();
+								sc.nextLine(); // "flush"
+								
+								print("Enter the new description in one line: ");
+								description = sc.nextLine();
+								
+								print("Enter the new type: ");
+								type = sc.nextLine();
+								
+								ac.setName(name);
+								ac.setPrice(price);
+								ac.setDescription(description);
+								ac.setType(type);
+								
+								println("Ala Carte with ID: " + id + " has been modified!");
+								break;
+							}
+						} while (1 <= subChoice2 && subChoice2 <= 5);
+								
 						break;
 						
 					// Remove an Ala Carte object
@@ -145,6 +226,7 @@ public class RestaurantApp
 						break;
 					}
 				} while (1 <= subChoice && subChoice <= 3);
+				
 				break;
 				
 			case 2: // Create/Update/Remove promotion
@@ -170,7 +252,7 @@ public class RestaurantApp
 						price = sc.nextDouble();
 						sc.nextLine(); // "flush"
 						
-						print("Enter Set Package description: ");
+						print("Enter Set Package description in one line: ");
 						description = sc.nextLine();
 						
 						sp = new SetPackage(name, price, description);
@@ -205,6 +287,73 @@ public class RestaurantApp
 						// Get the Set Package to be updated by ID first (menu.getSetPackageById(int id))
 						// Update -> switch () based on what is going to be updated
 						// TODO implement this!
+						
+						menu.printMenu();
+						print("Enter the Set Package ID: ");
+						id = sc.nextInt();
+						
+						sp = menu.getSetPackageById(id);
+						if (sp == null) {
+							println("Error: Set Package with ID: " + id + " does not exist!");
+							continue;
+						}
+						
+						do {
+							// Print sub menu
+							println("\n1. Update name");
+							println("2. Update price");
+							println("3. Update description");
+							println("4. Update all fields"); // Rather than choosing 1 and then 2 etc.
+							println("5. Back");
+							print("Enter your choice: ");
+							subChoice2 = sc.nextInt();
+							sc.nextLine(); // "flush"
+							
+							switch (subChoice2) {
+							case 1:
+								print("Enter the new name: ");
+								name = sc.nextLine();
+								
+								sp.setName(name);
+								println("The name of Set Package with ID: " + id + " has been modified!");
+								break;
+								
+							case 2:
+								print("Enter the new price: ");
+								price = sc.nextDouble();
+								
+								sp.setPrice(price);
+								println("The price of Set Package with ID: " + id + " has been modified!");
+								break;
+								
+							case 3:
+								print("Enter the new description in one line: ");
+								description = sc.nextLine();
+								
+								sp.setDescription(description);
+								println("The description of Set Package with ID: " + id + " has been modified!");
+								break;
+								
+							case 4:
+								print("Enter the new name: ");
+								name = sc.nextLine();
+								
+								print("Enter the new price: ");
+								price = sc.nextDouble();
+								sc.nextLine(); // "flush"
+								
+								print("Enter the new description in one line: ");
+								description = sc.nextLine();
+								
+								sp.setName(name);
+								sp.setPrice(price);
+								sp.setDescription(description);
+
+								println("Set Package with ID: " + id + " has been modified!");
+								break;
+							}
+						} while (1 <= subChoice2 && subChoice2 <= 4);
+								
 						break;
 					
 					// Remove an entire Set Package from the Menu
@@ -223,6 +372,7 @@ public class RestaurantApp
 						break;
 					}
 				} while (1 <= subChoice && subChoice <= 3);
+				
 				break;
 				
 			case 3: // Create order
@@ -346,6 +496,7 @@ public class RestaurantApp
 				order.printOrder();
 				
 				break;
+				
 			case 5: // Add/Remove order item/s to/from order
 				
 				// ask for orderId
