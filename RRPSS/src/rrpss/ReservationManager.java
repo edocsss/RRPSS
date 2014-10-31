@@ -26,13 +26,9 @@ public class ReservationManager {
 		
 		// check if okay for making reservation
 		Calendar now = new GregorianCalendar();
-		if (dateTime.getTime().before(now.getTime())) {
-			System.out.println("Cannot book in past time!");
-			return -1;
-		}
 		
-		if (table == null) {
-			System.out.println("Restaurant full!");
+		// If the given dateTime is before current time -> error
+		if (dateTime.compareTo(now) <= 0) {
 			return -1;
 		}
 		
@@ -49,7 +45,7 @@ public class ReservationManager {
 	
 	private Reservation getReservationById(int reservationId) {
 		for (Reservation reservation: reservations) {
-			if (reservation.getId() == reservationId) {
+			if (reservation.getStatus().equalsIgnoreCase("active") && reservation.getId() == reservationId) {
 				return reservation;
 			}
 		}
@@ -57,6 +53,9 @@ public class ReservationManager {
 		return null;
 	}
 	
+	public Reservation getReservationByTableNum(int tableNum) {
+		return getReservationByTableNum(tableNum, "Checked-in");
+	}
 	
 	// To get the Customer membership when an printOrderInvoice is called
 	public Reservation getReservationByTableNum(int tableNum, String status) {
@@ -68,17 +67,18 @@ public class ReservationManager {
 		
 		return null;
 	}
-	public Reservation getReservationByTableNum(int tableNum) {
-		return getReservationByTableNum(tableNum, "Checked-in");
-	}
-	
-	/**
-	 * TODO Need implementation!!
-	 * **/
-	public void checkReservation(int reservationId) {
+
+	public int checkReservation(int reservationId) {
 		checkExpiry();
+		
 		//Use getReservationById -> DON'T FORGET TO CHECK Reservation == NULL
-		// print data & status based on id
+		Reservation reservation = getReservationById(reservationId);
+		if (reservation == null) {
+			return -1;
+		} else {
+			reservation.printReservation();
+			return 1;
+		}
 	}
 	
 	public void checkExpiry() {
@@ -88,13 +88,20 @@ public class ReservationManager {
 	}
 
 	public void checkExpiry(Reservation reservation) {
-		Calendar now = new GregorianCalendar();
-		Date later = new Date();
-		later.setTime(now.getTime().getTime() + BUFFER_TIME * 60 * 100);
-		now.setTime(later);
+		Calendar reservationTime = reservation.getDateTime();
+		long reservationTimeMilli = reservationTime.getTime().getTime();
+		Date expiredTime = new Date();
 		
-		// Reservation will be automatically removed XX minutes after the actual booking time.
-		if (reservation.getDateTime().getTime().after(now.getTime())) {
+		// The expired time is calculated here
+		expiredTime.setTime(reservationTimeMilli + BUFFER_TIME * 60 * 1000);
+		
+		// now = currentTime when this method is called
+		// expiredReservationCalendar = reservation time + BUFFER_TIME minutes
+		Calendar now = new GregorianCalendar();
+		Calendar expiredReservationCalendar = new GregorianCalendar();
+		expiredReservationCalendar.setTime(expiredTime);
+		
+		if (now.compareTo(expiredReservationCalendar) > 0) {
 			reservation.setStatus("Expired");
 		}
 	}
