@@ -54,4 +54,7 @@ public class Reservation {
 	public String getStatus() {
 		return this.status;
 	}
+	//TODO print reservation details
+	public void printReservation() {
+	}
 }

@@ -65,16 +65,6 @@ public class Order
 		}
 	}
 	
-	public void removeAlaCarte (AlaCarte alaCarte)
-	{
-		this.alaCartes.remove(alaCarte);
-	}
-	
-	public HashMap<AlaCarte, Integer> getAlaCartes()
-	{
-		return this.alaCartes;
-	}
-	
 	private AlaCarte getAlaCarteByItemId (int itemId)
 	{
 		AlaCarte[] acs = this.alaCartes.keySet().toArray(new AlaCarte[0]);
@@ -103,6 +93,16 @@ public class Order
 		}
 	}
 	
+	public void removeAlaCarte (AlaCarte alaCarte)
+	{
+		this.alaCartes.remove(alaCarte);
+	}
+	
+	public HashMap<AlaCarte, Integer> getAlaCartes()
+	{
+		return this.alaCartes;
+	}
+	
 	public void addSetPackage (SetPackage setPackage, int quantity)
 	{
 		SetPackage sp = getSetPackageByItemId(setPackage.getId());
@@ -111,16 +111,6 @@ public class Order
 		} else {
 			setPackages.put(setPackage, quantity);
 		}
-	}
-	
-	public void removeSetPackage (SetPackage setPackage)
-	{
-		this.setPackages.remove(setPackage);
-	}
-	
-	public HashMap<SetPackage, Integer> getSetPackages()
-	{
-		return this.setPackages;
 	}
 	
 	private SetPackage getSetPackageByItemId (int itemId)
@@ -148,6 +138,16 @@ public class Order
 			this.setPackages.remove(sp);
 			return 1;
 		}
+	}
+	
+	public void removeSetPackage (SetPackage setPackage)
+	{
+		this.setPackages.remove(setPackage);
+	}
+	
+	public HashMap<SetPackage, Integer> getSetPackages()
+	{
+		return this.setPackages;
 	}
 	
 	public void setStaff (Staff staff)

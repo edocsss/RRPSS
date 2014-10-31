@@ -59,7 +59,7 @@ public class RestaurantApp
 		int choice = 0, subChoice = 0, subChoice2 = 0;
 		String name, description, type, membershipString, dateTimeString;
 		int id, tableNum, staffId, quantity, contact, numPeople, reservationId;
-		boolean membership;
+		boolean membership = false;
 		double price;
 		Table table;
 		Staff staff;
@@ -73,6 +73,9 @@ public class RestaurantApp
 		menu.printMenu();
 		
 		do {
+			println("=================================================");
+			println("Restaurant Reservation and Point of Sale System: ");
+			println("=================================================");
 			println("1. Create/Update/Remove menu item");
 			println("2. Create/Update/Remove promotion");
 			println("3. Create order");
@@ -93,7 +96,8 @@ public class RestaurantApp
 			switch (choice) {
 			case 1: // Create/Update/Remove menu item
 				do {
-					println("n1. Create menu item");
+					menu.printMenu();
+					println("1. Create menu item");
 					println("2. Update menu item");
 					println("3. Remove menu item");
 					println("4. Back");
@@ -106,12 +110,14 @@ public class RestaurantApp
 					switch(subChoice) {
 					
 					// Add an Ala Carte
+					// TODO what if the name of the going-to-be-added AlaCarte item is the same as one of the item in the menu currently?
 					case 1:
 						print("\nEnter Ala Carte name: ");
 						name = sc.nextLine();
 						
 						print("Enter Ala Carte price: ");
 						price = sc.nextDouble();
+						sc.nextLine();
 						
 						print("Enter Ala Carte description in one line: ");
 						description = sc.nextLine();
@@ -129,7 +135,6 @@ public class RestaurantApp
 					// Update a particular Ala Carte object
 					case 2:
 						// Update -> switch () based on what is going to be updated
-						menu.printMenu();
 						print("Enter the Ala Carte ID: ");
 						id = sc.nextInt();
 						
@@ -231,6 +236,7 @@ public class RestaurantApp
 				
 			case 2: // Create/Update/Remove promotion
 				do {
+					menu.printMenu();
 					println("\n1. Create Set Package");
 					println("2. Update Set Package");
 					println("3. Remove Set Package");
@@ -244,6 +250,7 @@ public class RestaurantApp
 					switch(subChoice) {
 					
 					// Add Set Package
+					// TODO what if the name of the going-to-be-added SetPackage item is the same as one of the item in the menu currently?
 					case 1:
 						print("\nEnter Set Package name: ");
 						name = sc.nextLine();
@@ -286,7 +293,6 @@ public class RestaurantApp
 					case 2:
 						// Get the Set Package to be updated by ID first (menu.getSetPackageById(int id))
 						// Update -> switch () based on what is going to be updated
-						// TODO implement this!
 						
 						menu.printMenu();
 						print("Enter the Set Package ID: ");
@@ -377,12 +383,12 @@ public class RestaurantApp
 				
 			case 3: // Create order
 				// Get Table object using TableManager.getTableById(tableNum)
-				print("\nEnter table number: ");
+				print("Enter table number: ");
 				tableNum = sc.nextInt();
 				table = tableManager.getTableById(tableNum);
 				
 				if (table == null) {
-					println("Error: Wrong table number!");
+					println("Error: Wrong table number!\n");
 					continue;
 				}
 				
@@ -393,6 +399,7 @@ public class RestaurantApp
 				//			n/a		  -> occupied (walk-in or reserved) -> GIVE ERROR CODE!
 
 				// Check walk-in or with reservation
+				// Search for reservation with tableNum and "Active status"
 				reservation = reservationManager.getReservationByTableNum(tableNum, "Active");
 				if (reservation == null) {
 					if (table.getAvailability()) {
@@ -423,15 +430,13 @@ public class RestaurantApp
 				// Create new Order Object using OrderManager.createOrder (Calendar dateTime, Staff staff)
 				order = orderManager.createOrder(new GregorianCalendar(), staff);
 				
-				// TODO (ask whether the customer wants to add an AlaCarte or a SetPackage) (?)
-				
-				// TODO Print menu
+				// Print menu
 				menu.printMenu();
 				
 				// Get AlaCarte and SetPackage object using Menu.getAlaCarteById(id) and Menu.getSetPackageById(id)
 				// 		CHECK IF getAlaCarteById or getSetPackageById return NULL
 				// 		Add all AlaCarte and SetPackage object to Order
-				println("Input AlaCarte IDs and quantity (space-separated) | Enter -1 to end: ");
+				println("Input Ala Carte IDs and quantity (space-separated) | Enter -1 to end: ");
 				while (sc.hasNextInt()) {
 					id = sc.nextInt();
 					
@@ -445,11 +450,12 @@ public class RestaurantApp
 					if (ac == null) {
 						println("Error: Ala Carte with ID: " + id + " does not exist!");
 					} else {
+						// Use copy so that the item attributes are not changed when the item in Menu is changed
 						order.addAlaCarte(ac.copy(), quantity);
 					}
 				}
 				
-				println("Input SetPackage IDs and quantity (space-separated) | Enter -1 to end: ");
+				println("Input Set Package IDs and quantity (space-separated) | Enter -1 to end: ");
 				while (sc.hasNextInt()) {
 					id = sc.nextInt();
 					
@@ -463,17 +469,19 @@ public class RestaurantApp
 					if (sp == null) {
 						println("Error: Set Package with ID: " + id + " does not exist!\n");
 					} else {
+						// Use copy so that the item attributes are not changed when the item in Menu is changed
 						order.addSetPackage(sp.copy(), quantity);
 					}
 				}
 				
 				// tableObject.setOrder(order)
 				table.setOrder(order);
+				println("An order for table number " + tableNum + " has been created!");
 				
 				break;
 				
 			case 4: // View order
-				print("\nEnter table number: ");
+				print("Enter table number: ");
 				tableNum = sc.nextInt();
 				
 				// Get Table object using TableManager.getTableById(tableNum)
@@ -519,6 +527,8 @@ public class RestaurantApp
 				// switch: add/remove
 				println("1. Add order items to order");
 				println("2. Remove order items from order");
+				println("3. Back");
+				print("Enter your choice: ");
 				
 				subChoice = sc.nextInt();
 				switch(subChoice) {
@@ -529,7 +539,8 @@ public class RestaurantApp
 					//		ac = Menu.getAlaCarteById(alaCarteIds); sp = Menu.getSetPackageById(setPackageIds)
 					//		Order.addAlaCarte(ac); Order.addSetPackage(sp)
 					
-					print("Input AlaCarte IDs and quantity (space-separated) | Enter -1 to end: ");
+					menu.printMenu();
+					println("\nInput AlaCarte IDs and quantity (space-separated) | Enter -1 to end: ");
 					while (sc.hasNextInt()) {
 						id = sc.nextInt();
 						
@@ -547,7 +558,7 @@ public class RestaurantApp
 						}
 					}
 					
-					print("Input SetPackage IDs (space-separated) | Enter -1 to end: ");
+					println("Input SetPackage IDs and quantity (space-separated) | Enter -1 to end: ");
 					while (sc.hasNextInt()) {
 						id = sc.nextInt();
 						
@@ -572,8 +583,9 @@ public class RestaurantApp
 					// 		switch: AlaCarte or SetPackage
 					// 		Input alaCarteIds and setPackageIds
 					//		Order.removeAlaCarteById(alaCarteIds); Order.removeSetPackageByItemId(setPackageIds)
-
-					print("Input AlaCarte IDs | Enter -1 to end: ");
+						
+					menu.printMenu();
+					print("Input AlaCarte IDs (space-separated) | Enter -1 to end: ");
 					while (sc.hasNextInt()) {
 						id = sc.nextInt();
 						
@@ -582,9 +594,9 @@ public class RestaurantApp
 						}
 						
 						if (order.removeAlaCarteByItemId(id) == 1) {
-							println("Ala Carte with ID: " + id + " has been removed from the order!\n");
+							println("Ala Carte with ID: " + id + " has been removed from the order!");
 						} else {
-							println("Error: Ala Carte with ID: " + id + " does not exist in the order!\n");
+							println("Error: Ala Carte with ID: " + id + " does not exist in the order!");
 							continue;
 						}
 					}
@@ -598,9 +610,9 @@ public class RestaurantApp
 						}
 						
 						if (order.removeSetPackageByItemId(id) == 1) {
-							println("Set Package with ID: " + id + " has been removed from the order!\n");
+							println("Set Package with ID: " + id + " has been removed from the order!");
 						} else {
-							println("Error: Set Package with ID: " + id + " does not exist in the order!\n");
+							println("Error: Set Package with ID: " + id + " does not exist in the order!");
 							continue;
 						}
 					}
@@ -616,18 +628,22 @@ public class RestaurantApp
 				print("Name: ");
 				name = sc.nextLine();
 				
-				print("id: ");
+				print("ID: ");
 				id = sc.nextInt();
 				sc.nextLine(); // "flush"
 				
-				print("Membership (Y/N)? ");
-				membershipString = sc.nextLine();
-				
-				if (membershipString.equalsIgnoreCase("y")) {
-					membership = true;
-				} else {
-					membership = false;
-				}
+				do {
+					print("Membership (Y/N)? ");
+					membershipString = sc.nextLine();
+					
+					if (membershipString.equalsIgnoreCase("y")) {
+						membership = true;
+					} else if (membershipString.equalsIgnoreCase("n")) {
+						membership = false;
+					} else {
+						println("Error: Please enter only Y or N!");
+					}
+				} while (!membershipString.equalsIgnoreCase("y") && !membershipString.equalsIgnoreCase("n"));
 				
 				print("Contact: ");
 				contact = sc.nextInt();
@@ -638,15 +654,15 @@ public class RestaurantApp
 				
 				
 				//	input dateTime: date & time of reservation
-				println("Input date and time to reserve (Format: DD-MM-YYYY HH:mm, e.g. 01-01-2014 09:00): ");
-				SimpleDateFormat format = new SimpleDateFormat("DD-MM-YYYY HH:mm");
+				System.out.println("Input date and time to reserve (Format: dd-MM-yyyy HH:mm, e.g. 01-01-2014 09:00): ");
+				SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 				dateTimeString = sc.nextLine();
 				
 				// Building a Calendar object to be passed on to the Reservation object later
 				try {
 					dateTime.setTime(format.parse(dateTimeString));
 				} catch (ParseException e) {
-					println("Error: Wrong date format!\n");
+					println("Error: Wrong date format!");
 					e.printStackTrace();
 					continue;
 				}
@@ -655,20 +671,23 @@ public class RestaurantApp
 				print("Input number of people: ");
 				numPeople = sc.nextInt();
 				
-				//		run ReservationManager.checkExpiry() -> remove expired Reservations
+				// run ReservationManager.checkExpiry() -> remove expired Reservations
 				reservationManager.checkExpiry();
 				
-				// 		get Table object: TableManager.allocateTable(numPeople)
+				// get Table object: TableManager.allocateTable(numPeople)
 				table = tableManager.allocateTable(numPeople);
 				
 				if (table == null) {
-					println("All tables are reserved!\n");
+					println("No table is allocated because the restaurant is full or no table with enough seats is available!");
 				} else {
-					//	reservationId = ReservationManager.createReservation(customer, dateTime, table, numPeople)
 					reservationId = reservationManager.createReservation(customer, dateTime, table, numPeople);
 					
-					// 	print reservationId
-					println("A new reservation is created with ID: " + reservationId);
+					// Feedback
+					if (reservationId != -1) {
+						println("A new reservation is created with ID: " + reservationId + "!");
+					} else {
+						System.out.println("Error: Cannot book in past time!");
+					}
 				}
 				
 				break;
@@ -677,22 +696,30 @@ public class RestaurantApp
 				// input reservationId
 				print("Enter reservation ID: ");
 				reservationId = sc.nextInt();
-				
-				// run ReservationManager.checkReservation(reservationId)
-				reservationManager.checkReservation(reservationId);
-				
+								
 				// ask if want to removeReservation
-				println("1. Back");
+				println("1. Check reservation");
 				println("2. Remove reservation");
-				
+				println("3. Back");
+				print("Enter your choice: ");
 				subChoice = sc.nextInt();
-				// run ReservationManager.cancelReservation(reservationId)
-				if (subChoice == 2) {
-					if (reservationManager.cancelReservation(reservationId) == 1) {
-						println("Reservation with ID: " + reservationId + " has been removed!\n");
-					} else {
-						println("Error: Reservation with ID: " + reservationId + " does not exist!\n");
+				
+				switch (subChoice) {
+				case 1:
+					if (reservationManager.checkReservation(reservationId) == -1) {
+						println("Error: Reservation with ID: " + reservationId + " does not exist!");
 					}
+					
+					break;
+					
+				case 2:
+					if (reservationManager.cancelReservation(reservationId) == 1) {
+						println("Reservation with ID: " + reservationId + " has been removed!");
+					} else {
+						println("Error: Reservation with ID: " + reservationId + " does not exist!");
+					}
+					
+					break;
 				}
 				
 				break;
@@ -736,14 +763,12 @@ public class RestaurantApp
 
 				// Get Order object from Table 
 				order = table.getOrder();
-				
 				if (order == null) {
 					println("Error: Table number " + tableNum + " does not have any order!");
 					continue;
 				}
 				
-				
-				// If there is a customer on that table
+				// If there is a customer on that table -> check by reservation or walk in
 				reservation = reservationManager.getReservationByTableNum(tableNum, "Checked-in");
 				if (reservation == null) {
 					// walk-in customer
@@ -755,6 +780,7 @@ public class RestaurantApp
 					} else {
 						membership = false;
 					}
+					
 				} else {
 					// customer with reservation
 					membership = reservation.getCustomer().getMembership();
