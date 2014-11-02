@@ -178,11 +178,14 @@ public class Order
 	public void printOrder ()
 	{
 		//Something like toString -> like a breakdown of what has been ordered
-		for (AlaCarte ac: alaCartes.keySet().toArray(new AlaCarte[0])) {
+		for (AlaCarte ac: alaCartes.keySet().toArray(new AlaCarte[0])) 
+		{
 			System.out.println(String.format("%-5s%-20s @%-8.2f x%-5d = %-10.2f",
 					ac.id, ac.name, ac.price, alaCartes.get(ac), ac.price * alaCartes.get(ac)));
 		}
-		for (SetPackage sp: setPackages.keySet().toArray(new SetPackage[0])) {
+		
+		for (SetPackage sp: setPackages.keySet().toArray(new SetPackage[0])) 
+		{
 			System.out.println(String.format("%-5s%-20s%-8.2f x%-5d = %-10.2f",
 					sp.id, sp.name, sp.price, setPackages.get(sp), sp.price * setPackages.get(sp)));
 		}

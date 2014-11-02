@@ -4,10 +4,12 @@ import java.util.Vector;
 public class Menu {
 	private Vector <AlaCarte> alaCartes;
 	private Vector <SetPackage> setPackages;
+	private int idCounter;
 	
 	public Menu() {
 		alaCartes = new Vector<AlaCarte>();
 		setPackages = new Vector<SetPackage>();
+		idCounter = 0;
 	}
 	
 	public Vector<AlaCarte> getAlaCartes() {
@@ -17,6 +19,7 @@ public class Menu {
 	public Vector<SetPackage> getSetPackages() {
 		return setPackages;
 	}
+	
 	public AlaCarte getAlaCarteById(int id) {
 		int numAlaCartes = this.alaCartes.size();
 		for (int i = 0; i < numAlaCartes; i++) {
@@ -27,6 +30,7 @@ public class Menu {
 		
 		return null;
 	}
+	
 	public SetPackage getSetPackageById(int id) {
 		int numSetPackages = this.setPackages.size();
 		for (int i = 0; i < numSetPackages; i++) {
@@ -37,13 +41,17 @@ public class Menu {
 		
 		return null;
 	}
+	
 	public void addAlaCarte(AlaCarte ac) {
-		ac.setId(alaCartes.size() + setPackages.size() + 1);
+		ac.setId(idCounter + 1);
 		alaCartes.add(ac);
+		idCounter++;
 	}
+	
 	public void addSetPackage(SetPackage sp) {
-		sp.setId(alaCartes.size() + setPackages.size() + 1);
+		sp.setId(idCounter + 1);
 		setPackages.add(sp);
+		idCounter++;
 	}
 	
 	public int removeAlaCarteById(int id) {
@@ -70,8 +78,7 @@ public class Menu {
 		return -1;
 	}
 	
-	public void printMenu ()
-	{
+	public void printMenu () {
 		//Something like toString -> like a breakdown of what has been ordered
 		System.out.println("                                      MENU                                      ");
 		System.out.println("================================================================================");

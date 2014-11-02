@@ -7,10 +7,12 @@ import java.util.Vector;
 
 public class ReservationManager {
 	private Vector <Reservation> reservations;
+	private int idCounter;
 	private static final int BUFFER_TIME = 15;
 	
 	public ReservationManager() {
 		this.reservations = new Vector<Reservation>();
+		this.idCounter = 0;
 	}
 
 	/**
@@ -33,10 +35,11 @@ public class ReservationManager {
 		}
 		
 		//Get the Reservation ID based on the Vector size()
-		int id = reservations.size() + 1;
+		int id = this.idCounter + 1;
 			
 		//Create and add a new Reservation() object based on the customer object and the table object
 		Reservation reservation = new Reservation(dateTime, table, id, customer);
+		this.idCounter++;
 		
 		reservations.add(reservation);
 		

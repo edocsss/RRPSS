@@ -804,11 +804,21 @@ public class RestaurantApp
 			case 10: // Print sale revenue report by period (eg day or month)
 				// input period (day or month)
 				String period;
+				int check;
 				
 				print("Enter period (MMYYYY or DDMMYYYY): ");
 				period = sc.next();
+				
 				// Static method -> allows all restaurants to use this Class just to print the Revenue Report (expandability purpose)
-				RevenueReport.printReport(period, orderInvoiceManager.getOrderInvoices());
+				check = RevenueReport.printReport(period, orderInvoiceManager.getOrderInvoices());
+				if (check == -1)
+				{
+					println("Error: There is no order invoice within the specified date or month!");
+				}
+				else if (check == -2)
+				{
+					println("Error: Wrong period input! Please give the period in the format of MMYYYY or DDMMYYYY");
+				}
 				
 				break;
 				

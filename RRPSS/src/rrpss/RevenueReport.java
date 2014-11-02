@@ -3,7 +3,7 @@ import java.util.*;
 
 public class RevenueReport
 {
-	public static void printReport (String period, Vector<OrderInvoice> orderInvoices)
+	public static int printReport (String period, Vector<OrderInvoice> orderInvoices)
 	{
 		// Daily
 		if (period.length() == 8)
@@ -20,7 +20,15 @@ public class RevenueReport
 				}
 			}
 			
-			printReportByDay(dailyOrderInvoices);
+			if (dailyOrderInvoices.size() == 0) 
+			{
+				return -1; //No order invoice has the specified date or month!
+			}
+			else
+			{
+				printReportByDay(dailyOrderInvoices);
+				return 1;
+			}
 		}
 		
 		// Monthly
@@ -36,7 +44,19 @@ public class RevenueReport
 				}
 			}
 			
-			printReportByMonth(monthlyOrderInvoices);
+			if (monthlyOrderInvoices.size() == 0)
+			{
+				return -1; // No order invoice has the specified date or month!
+			}
+			else
+			{
+				printReportByMonth(monthlyOrderInvoices);
+				return 1;
+			}
+		}
+		else
+		{
+			return -2; // IF the String given is wrong (not of length 6 or 8)
 		}
 	}
 	
@@ -75,14 +95,13 @@ For Demo, you need to show this function with at least 2 sale invoices for each 
 	{
 		// TODO Print the breakdown of the items for each invoice -> call printInvoice for each OrderInvoice object
 		for (OrderInvoice oI: dailyOrderInvoices) {
-			
+			oI.printInvoice();
 		}
 	}
 	
 	private static void printReportByMonth (Vector<OrderInvoice> monthlyOrderInvoices)
 	{
 		//Find the max, min total price and total revenue for the whole month
-		OrderInvoice orderInvoiceMax = null, orderInvoiceMin = null;
 		double min, max, totalPrice;
 		double totalMonthlyRevenue = 0.0;
 		
@@ -95,12 +114,11 @@ For Demo, you need to show this function with at least 2 sale invoices for each 
 			if (totalPrice < min)
 			{
 				min = totalPrice;
-				orderInvoiceMin = o;
 			}
+			
 			if (totalPrice > max)
 			{
 				max = totalPrice;
-				orderInvoiceMax = o;
 			}
 		}
 		
