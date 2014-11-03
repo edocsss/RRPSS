@@ -2,6 +2,7 @@ package rrpss;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 /*
  * Order status = Active or Closed
@@ -175,9 +176,25 @@ public class Order
 		return this.status;
 	}
 	
+	public String getDateTimeString() {
+		return this.dateTime.get(Calendar.DAY_OF_MONTH) + " "
+				+ this.dateTime.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH) + " "
+				+ this.dateTime.get(Calendar.YEAR) + ", "
+				+ this.dateTime.get(Calendar.HOUR_OF_DAY) + ":"
+				+ this.dateTime.get(Calendar.MINUTE) + ":"
+				+ this.dateTime.get(Calendar.SECOND);
+	}
+	
 	public void printOrder ()
 	{
 		//Something like toString -> like a breakdown of what has been ordered
+
+		System.out.println("                                 ORDER                                          ");
+		System.out.println("================================================================================");
+		System.out.println(String.format("%-3sid: %-4s status: %-8s staff: %-10s Date/time: %-22s",
+				" ", id, status, staff.getName(), getDateTimeString()));
+		System.out.println("================================================================================");
+		
 		for (AlaCarte ac: alaCartes.keySet().toArray(new AlaCarte[0])) 
 		{
 			System.out.println(String.format("%-5s%-20s @%-8.2f x%-5d = %-10.2f",
@@ -186,9 +203,10 @@ public class Order
 		
 		for (SetPackage sp: setPackages.keySet().toArray(new SetPackage[0])) 
 		{
-			System.out.println(String.format("%-5s%-20s%-8.2f x%-5d = %-10.2f",
+			System.out.println(String.format("%-5s%-20s @%-8.2f x%-5d = %-10.2f",
 					sp.id, sp.name, sp.price, setPackages.get(sp), sp.price * setPackages.get(sp)));
 		}
+		System.out.println();
 	}
 	
 }

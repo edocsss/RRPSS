@@ -45,10 +45,10 @@ public class ReservationManager {
 		
 		return id;
 	}
-	
+
 	private Reservation getReservationById(int reservationId) {
 		for (Reservation reservation: reservations) {
-			if (reservation.getStatus().equalsIgnoreCase("active") && reservation.getId() == reservationId) {
+			if (reservation.getId() == reservationId) {
 				return reservation;
 			}
 		}
@@ -56,14 +56,14 @@ public class ReservationManager {
 		return null;
 	}
 	
-	public Reservation getReservationByTableNum(int tableNum) {
-		return getReservationByTableNum(tableNum, "Checked-in");
+	public Reservation getReservationByTableId(int tableId) {
+		return getReservationByTableId(tableId, "checked-in");
 	}
 	
 	// To get the Customer membership when an printOrderInvoice is called
-	public Reservation getReservationByTableNum(int tableNum, String status) {
+	public Reservation getReservationByTableId(int tableId, String status) {
 		for (Reservation reservation: reservations) {
-			if (reservation.getTable().getId() == tableNum && reservation.getStatus().equalsIgnoreCase(status)) {
+			if (reservation.getTable().getId() == tableId && reservation.getStatus().equalsIgnoreCase(status)) {
 				return reservation;
 			}
 		}
@@ -74,7 +74,6 @@ public class ReservationManager {
 	public int checkReservation(int reservationId) {
 		checkExpiry();
 		
-		//Use getReservationById -> DON'T FORGET TO CHECK Reservation == NULL
 		Reservation reservation = getReservationById(reservationId);
 		if (reservation == null) {
 			return -1;
@@ -112,7 +111,8 @@ public class ReservationManager {
 	public int cancelReservation (int reservationId) {
 		Reservation r = getReservationById(reservationId);
 		
-		if (r != null) {
+		// if reservation is exist and active, can cancel
+		if (r != null && r.getStatus().equalsIgnoreCase("active")) {
 			r.setStatus("Cancelled");
 			return 1;
 		} else {

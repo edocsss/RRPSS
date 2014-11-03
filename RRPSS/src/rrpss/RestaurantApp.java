@@ -58,7 +58,7 @@ public class RestaurantApp
 		// Variable Declaration
 		int choice = 0, subChoice = 0, subChoice2 = 0;
 		String name, description, type, membershipString, dateTimeString;
-		int id, tableNum, staffId, quantity, contact, numPeople, reservationId;
+		int id, tableId, staffId, quantity, contact, numPeople, reservationId;
 		boolean membership = false;
 		double price;
 		Table table;
@@ -382,25 +382,25 @@ public class RestaurantApp
 				break;
 				
 			case 3: // Create order
-				// Get Table object using TableManager.getTableById(tableNum)
+				// Get Table object using TableManager.getTableById(tableId)
 				print("Enter table number: ");
-				tableNum = sc.nextInt();
-				table = tableManager.getTableById(tableNum);
+				tableId = sc.nextInt();
+				table = tableManager.getTableById(tableId);
 				
 				if (table == null) {
 					println("Error: Wrong table number!\n");
 					continue;
 				}
 				
-				// check reservation with tableNum
+				// check reservation with tableId
 				// exist & active -> with reservation
 				// not exist -> check tableAvailability
 				//			available -> walk-in
 				//			n/a		  -> occupied (walk-in or reserved) -> GIVE ERROR CODE!
 
 				// Check walk-in or with reservation
-				// Search for reservation with tableNum and "Active status"
-				reservation = reservationManager.getReservationByTableNum(tableNum, "Active");
+				// Search for reservation with tableId and "Active status"
+				reservation = reservationManager.getReservationByTableId(tableId, "Active");
 				if (reservation == null) {
 					if (table.getAvailability()) {
 						// Update table availability to false for walk-in customers
@@ -413,7 +413,7 @@ public class RestaurantApp
 				
 				// If the table has an order -> ERROR
 				if (table.getOrder() != null) {
-					println("Error: Table number " + tableNum + " has already had an order!");
+					println("Error: Table number " + tableId + " has already had an order!");
 					println("Please use the update function to update this order!");
 					continue;
 				}
@@ -449,6 +449,8 @@ public class RestaurantApp
 					
 					if (ac == null) {
 						println("Error: Ala Carte with ID: " + id + " does not exist!");
+					} else if (quantity <= 0) {
+						println("Error: Please enter positive integer for quantity!");
 					} else {
 						// Use copy so that the item attributes are not changed when the item in Menu is changed
 						order.addAlaCarte(ac.copy(), quantity);
@@ -468,6 +470,8 @@ public class RestaurantApp
 					
 					if (sp == null) {
 						println("Error: Set Package with ID: " + id + " does not exist!\n");
+					} else if (quantity <= 0) {
+						println("Error: Please enter positive integer for quantity!");
 					} else {
 						// Use copy so that the item attributes are not changed when the item in Menu is changed
 						order.addSetPackage(sp.copy(), quantity);
@@ -476,16 +480,16 @@ public class RestaurantApp
 				
 				// tableObject.setOrder(order)
 				table.setOrder(order);
-				println("An order for table number " + tableNum + " has been created!");
+				println("An order for table number " + tableId + " has been created!");
 				
 				break;
 				
 			case 4: // View order
 				print("Enter table number: ");
-				tableNum = sc.nextInt();
+				tableId = sc.nextInt();
 				
-				// Get Table object using TableManager.getTableById(tableNum)
-				table = tableManager.getTableById(tableNum);
+				// Get Table object using TableManager.getTableById(tableId)
+				table = tableManager.getTableById(tableId);
 				
 				if (table == null) {
 					println("Error: Wrong table number!\n");
@@ -496,7 +500,7 @@ public class RestaurantApp
 				order = table.getOrder();
 				
 				if (order == null) {
-					println("Error: Table " + tableNum + " does not have any order!\n");
+					println("Error: Table " + tableId + " does not have any order!\n");
 					continue;
 				}
 				
@@ -509,10 +513,10 @@ public class RestaurantApp
 				
 				// ask for orderId
 				print("Enter table number: ");
-				tableNum = sc.nextInt();
+				tableId = sc.nextInt();
 				
 				// get Order Object from OrderManager.getOrderById(orderId)
-				table = tableManager.getTableById(tableNum);
+				table = tableManager.getTableById(tableId);
 				if (table == null) {
 					println("Error: Wrong table number!");
 					continue;
@@ -521,7 +525,7 @@ public class RestaurantApp
 				// Get the Order object
 				order = table.getOrder();
 				if (order == null) {
-					println("Error: Table number " + tableNum + " does not have any order!");
+					println("Error: Table number " + tableId + " does not have any order!");
 				}
 
 				// switch: add/remove
@@ -553,6 +557,8 @@ public class RestaurantApp
 						
 						if (ac == null) {
 							println("Error: Ala Carte with the given ID does not exist!");
+						} else if (quantity <= 0) {
+							println("Error: Please enter positive integer for quantity!");
 						} else {
 							order.addAlaCarte(ac.copy(), quantity);
 						}
@@ -571,6 +577,8 @@ public class RestaurantApp
 						
 						if (sp == null) {
 							println("Error: Set Package with the given ID does not exist!");
+						} else if (quantity <= 0) {
+							println("Error: Please enter positive integer for quantity!");
 						} else {
 							order.addSetPackage(sp.copy(), quantity);
 						}
@@ -725,19 +733,19 @@ public class RestaurantApp
 				break;
 				
 			case 8: // Check table availability
-				// input tableNum
-				// run TableManager.getTableById(tableNum).getAvailability()
+				// input tableId
+				// run TableManager.getTableById(tableId).getAvailability()
 				print("Input table number: ");
-				tableNum = sc.nextInt();
-				table = tableManager.getTableById(tableNum);
+				tableId = sc.nextInt();
+				table = tableManager.getTableById(tableId);
 				
 				if (table == null) {
-					println("Error: Table number " + tableNum + " does not exist!\n");
+					println("Error: Table number " + tableId + " does not exist!\n");
 				} else {
 					if (table.getAvailability()) {
-						println("Table number " + tableNum + " is available!");
+						println("Table number " + tableId + " is available!");
 					} else {
-						println("Table number " + tableNum + " is unavailable!");
+						println("Table number " + tableId + " is unavailable!");
 					}
 				}
 				
@@ -745,31 +753,31 @@ public class RestaurantApp
 				
 			case 9: // Print order invoice
 				print("Enter table number: ");
-				tableNum = sc.nextInt();
+				tableId = sc.nextInt();
 				sc.nextLine(); // "flush"
-				table = tableManager.getTableById(tableNum);
+				table = tableManager.getTableById(tableId);
 				
-				// If the tableNum given is invalid
+				// If the tableId given is invalid
 				if (table == null) {
-					println("Error: Table number " + tableNum + " does not exist!\n");
+					println("Error: Table number " + tableId + " does not exist!\n");
 					continue;
 				}
 				
 				// The table must be assigned to a customer in order to have an Order object
 				if (table.getAvailability()) {
-					println("Error: Table number: " + tableNum + " does not have customer!\n");
+					println("Error: Table number: " + tableId + " does not have customer!\n");
 					continue;
 				}
 
 				// Get Order object from Table 
 				order = table.getOrder();
 				if (order == null) {
-					println("Error: Table number " + tableNum + " does not have any order!");
+					println("Error: Table number " + tableId + " does not have any order!");
 					continue;
 				}
 				
 				// If there is a customer on that table -> check by reservation or walk in
-				reservation = reservationManager.getReservationByTableNum(tableNum, "Checked-in");
+				reservation = reservationManager.getReservationByTableId(tableId, "Checked-in");
 				if (reservation == null) {
 					// walk-in customer
 					print("Membership (Y/N)? ");
@@ -794,7 +802,7 @@ public class RestaurantApp
 				table.setOrder(null);
 				
 				// create Order Invoice
-				orderInvoice = orderInvoiceManager.createOrderInvoice(order, membership, tableNum);
+				orderInvoice = orderInvoiceManager.createOrderInvoice(order, membership, tableId);
 				
 				// Directly print the newly created OrderInvoice object
 				orderInvoice.printInvoice();

@@ -8,7 +8,7 @@ public class OrderInvoice
 	private static final double DISCOUNT = 0.1;
 	private double totalPrice;
 	private Order order;
-	private int tableNum;
+	private int tableId;
 	private boolean membership;
 	private double totalDiscount;
 	private double totalGST;
@@ -18,12 +18,12 @@ public class OrderInvoice
 	// If the table is assigned, look whether there is an Active reservation having that tableNo
 	// If there is, retrieve the customer membership
 	// If not, it means the customer is a walk-in -> ask for input whether the customer has a membership
-	public OrderInvoice (Order order, boolean membership, int tableNum)
+	public OrderInvoice (Order order, boolean membership, int tableId)
 	{
 		this.order = order;
 		this.totalPrice = 0.0;
 		this.membership = membership;
-		this.tableNum = tableNum;
+		this.tableId = tableId;
 		this.grandTotal = 0.0;
 		this.totalGST = 0.0;
 		this.totalDiscount = 0.0;
@@ -66,7 +66,7 @@ public class OrderInvoice
 		}
 		
 		this.totalGST = this.grandTotal * GST;
-		this.grandTotal -= this.totalGST;
+		this.grandTotal += this.totalGST;
 		
 		
 	}
@@ -94,16 +94,21 @@ public class OrderInvoice
 	public void printInvoice ()
 	{
 		//Print the order breakdown & dateTime from Order object
-		
-		System.out.println(String.format("Order Invoice #%d", order.getId()));
-		System.out.println(String.format("Table: %5d Date: %s",
-				tableNum, order.getDateTime().toString())); //TODO make it more readable
-		System.out.println(String.format("Order breakdown"));
+
+		System.out.println
+							 ("================================================================================");
+		System.out.println(
+				String.format("                             ORDER INVOICE #%-5d                               ", order.getId()));
+		System.out.println(
+				String.format("                                TABLE #%-5d                                    ", tableId));
+
 		order.printOrder();
-		System.out.println(String.format("%-25s: %5.2f", "Total price", this.totalPrice));
-		System.out.println(String.format("%-25s: %5.2f", "Membership discount", this.totalDiscount));
-		System.out.println(String.format("%-25s: %5.2f", "GST", this.totalGST));
-		System.out.println(String.format("%-25s: %5.2f", "Grand total", this.grandTotal));
+		System.out.println(String.format("%-43s: %-5.2f", "Total price", this.totalPrice));
+		System.out.println(String.format("%-43s: %-5.2f", "Membership discount", this.totalDiscount));
+		System.out.println(String.format("%-43s: %-5.2f", "GST", this.totalGST));
+		System.out.println(String.format("%-43s: %-5.2f", "Grand total", this.grandTotal));
+		System.out.println("================================================================================");
+		System.out.println();
 	}
 	
 }
