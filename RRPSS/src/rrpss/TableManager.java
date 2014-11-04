@@ -1,9 +1,10 @@
 package rrpss;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Vector;
 
-public class TableManager {
+public class TableManager implements Serializable {
 	private Vector <Table> tables;
 	private int numTables;
 	

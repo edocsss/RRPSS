@@ -1,9 +1,11 @@
 package rrpss;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class StaffManager {
+public class StaffManager implements Serializable {
 	private Vector<Staff> staffs;
+	
 	public StaffManager ()
 	{
 		this.staffs = new Vector<Staff> ();

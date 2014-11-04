@@ -1,11 +1,12 @@
 package rrpss;
 
-public class Table implements Comparable<Table> {
+import java.io.Serializable;
+
+public class Table implements Comparable<Table>, Serializable {
 	private int id;
 	private boolean availability;
 	private int capacity;
 	private Order order; // for view order (input: table number)
-	
 	
 	public Table(int id, int capacity) {
 		this.id = id;
@@ -13,27 +14,35 @@ public class Table implements Comparable<Table> {
 		this.availability = true;
 		// note that order hasn't been created
 	}
+	
 	public int getId() {
 		return id;
 	}
+	
 	public boolean getAvailability() {
 		return availability;
 	}
+	
 	public int getCapacity() {
 		return capacity;
 	}
+	
 	public Order getOrder() {
 		return order;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public void setOrder(Order o) {
 		this.order = o;
 	}
+	
 	public void setAvailability(boolean availability) {
 		this.availability = availability;
 	}
+	
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}

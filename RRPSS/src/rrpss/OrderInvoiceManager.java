@@ -1,9 +1,9 @@
 package rrpss;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class OrderInvoiceManager {
-
+public class OrderInvoiceManager implements Serializable  {
 	private Vector <OrderInvoice> orderInvoices;
 	
 	public OrderInvoiceManager() {

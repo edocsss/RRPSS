@@ -1,7 +1,8 @@
 package rrpss;
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Menu {
+public class Menu implements Serializable {
 	private Vector <AlaCarte> alaCartes;
 	private Vector <SetPackage> setPackages;
 	private int idCounter;

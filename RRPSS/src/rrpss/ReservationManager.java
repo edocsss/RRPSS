@@ -1,11 +1,12 @@
 package rrpss;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
-public class ReservationManager {
+public class ReservationManager implements Serializable {
 	private Vector <Reservation> reservations;
 	private int idCounter;
 	private static final int BUFFER_TIME = 15;
@@ -24,8 +25,6 @@ public class ReservationManager {
 	 * 			table		Table Object, table that will be allocated for the reservation, from app that calls TableManager.allocateTable
 	 */
 	public int createReservation(Customer customer, Calendar dateTime, Table table, int numPeople) {
-		
-		
 		// check if okay for making reservation
 		Calendar now = new GregorianCalendar();
 		

@@ -53,11 +53,11 @@ public final class Database
 		}
 	}
 	
-	public static int writeRestaurantObject (Restaurant r)
+	public static int writeRestaurantObject (Restaurant r, String path)
 	{
 		try
 		{
-			FileOutputStream fileOut = new FileOutputStream ("data.ser");
+			FileOutputStream fileOut = new FileOutputStream (path);
 			ObjectOutputStream objectOut = new ObjectOutputStream (fileOut);
 			
 			objectOut.writeObject(r);

@@ -1,5 +1,6 @@
 package rrpss;
 
+import java.io.Serializable;
 import java.util.*;
 
 /*
@@ -9,7 +10,7 @@ import java.util.*;
  * When allocateTable() is called, check expired reservation based on the reservation status and time 
  */
 
-public class Reservation {
+public class Reservation implements Serializable {
 	private Calendar dateTime;
 	private Table table;
 	private int id;
@@ -26,21 +27,26 @@ public class Reservation {
 		this.customer = customer;
 		setStatus("Active");
 	}
+	
 	public Customer getCustomer() {
 		return customer;
 	}
+	
 	public int getId() {
 		return id;
 	}
+	
 	//Probably not needed
 	public void updateReservation(Calendar dateTime, Table table, Customer customer) {
 		this.dateTime = dateTime;
 		this.table = table; //update table
 		this.customer = customer;
 	}
+	
 	public Calendar getDateTime() {
 		return dateTime;
 	}
+	
 	public void setStatus(String status) {
 		this.status = status;
 		
@@ -48,9 +54,11 @@ public class Reservation {
 			table.setAvailability(true);
 		}
 	}
+	
 	public Table getTable() {
 		return table;
 	}
+	
 	public String getStatus() {
 		return this.status;
 	}
@@ -64,7 +72,6 @@ public class Reservation {
 				+ this.dateTime.get(Calendar.SECOND);
 	}
 	
-	//TODO print reservation details
 	public void printReservation() {
 		System.out.println("                              RESERVATION                                       ");
 		System.out.println("================================================================================");

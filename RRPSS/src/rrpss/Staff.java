@@ -1,4 +1,5 @@
 package rrpss;
+
 public class Staff extends Person
 {
 	private String gender;

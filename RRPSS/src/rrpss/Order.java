@@ -1,5 +1,6 @@
 package rrpss;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -8,7 +9,7 @@ import java.util.Locale;
  * Order status = Active or Closed
  */
 
-public class Order
+public class Order implements Serializable 
 {
 	private int id;
 	private Calendar dateTime;

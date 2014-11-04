@@ -1,8 +1,9 @@
 package rrpss;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class OrderInvoice
+public class OrderInvoice implements Serializable 
 {
 	private static final double GST = 0.07;
 	private static final double DISCOUNT = 0.1;
@@ -71,7 +72,6 @@ public class OrderInvoice
 		
 	}
 	
-	
 	public Order getOrder ()
 	{
 		return this.order;
@@ -81,12 +81,15 @@ public class OrderInvoice
 	{
 		return this.totalPrice;
 	}
+	
 	public double getTotalDiscount() {
 		return this.totalDiscount;
 	}
+	
 	public double getTotalGST() {
 		return this.totalGST;
 	}
+	
 	public double getGrandTotal() {
 		return this.grandTotal;
 	}
@@ -110,5 +113,4 @@ public class OrderInvoice
 		System.out.println("================================================================================");
 		System.out.println();
 	}
-	
 }

@@ -1,9 +1,10 @@
 package rrpss;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Vector;
 
-public class OrderManager 
+public class OrderManager implements Serializable 
 {
 	private Vector<Order> orders;
 	private int idCounter;
