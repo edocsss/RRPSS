@@ -18,9 +18,8 @@ public class TableManager implements Serializable {
 	}
 	
 	public void addTable(int capacity) {
-		int id = tables.size() + 1;
+		int id = numTables++ + 1;
 		tables.add(new Table(id, capacity));
-		numTables++;
 	}
 	
 	public Table getTableById (int id) {
@@ -38,6 +37,7 @@ public class TableManager implements Serializable {
 		Table curTable = getTableById(id);
 		if (curTable != null) {
 			tables.remove(curTable);
+			numTables--;
 		} else {
 			System.out.println("Error: Cannot remove table, table not found :(");
 		}

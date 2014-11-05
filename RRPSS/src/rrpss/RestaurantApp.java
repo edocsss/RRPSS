@@ -22,7 +22,7 @@ public class RestaurantApp
 	}
 	
 	public static void main (String[] args) {
-		Restaurant r = new Restaurant("Restaurant Name");
+		Restaurant r = new Restaurant("The Lyked");
 		
 		// Read data from Database
 		r = Database.readRestaurantObject("Database//" + r.getName() + ".ser");
@@ -47,20 +47,67 @@ public class RestaurantApp
 			tableManager.addTable(4);
 			tableManager.addTable(8);
 			tableManager.addTable(10);
+			tableManager.addTable(5);
+			tableManager.addTable(4);
+			tableManager.addTable(8);
+			tableManager.addTable(8);
+			tableManager.addTable(6);
+			tableManager.addTable(5);
+			tableManager.addTable(10);
+			tableManager.addTable(12);
+			tableManager.addTable(2);
+			tableManager.addTable(4);
+			tableManager.addTable(4);
 			
-			// Adding Ala Carte
-			menu.addAlaCarte(new AlaCarte("Chicken rice", 5.5, "Delicious chicken rice", "Main course"));
-			menu.addAlaCarte(new AlaCarte("Chicken rice 2", 2.5, "Delicious chicken rice 2", "Main course"));
+			// Adding AlaCarte
+			menu.addAlaCarte(new AlaCarte("Hummus and Crackers", 10.5, "Hummus with raw vegan crackers", "Appetizers")); // ID: 1
+			menu.addAlaCarte(new AlaCarte("Salsa, Sushi, and Guacamole", 11.5, "Salsa, guacamole, and crackers", "Appetizers")); // ID: 2
+			menu.addAlaCarte(new AlaCarte("Sushi Hand Roll", 12.0, "With veggies and a savoury no tuna pate", "Appetizers")); // ID: 3
+			
+			menu.addAlaCarte(new AlaCarte("Pumpkin Soup", 8.5, "Soup with pumpkin flowers", "Soup & Pasta"));// ID: 4
+			menu.addAlaCarte(new AlaCarte("Goulash Soup", 8.5, "Hungarian style beef and potato soup", "Soup & Pasta")); // ID: 5
+			menu.addAlaCarte(new AlaCarte("Homemade Soup", 8.0, "Soup made fresh daily by our chef", "Soup & Pasta")); // ID: 6
+			menu.addAlaCarte(new AlaCarte("Risotto", 16.0, "With champagne", "Soup & Pasta")); // ID: 7
+			menu.addAlaCarte(new AlaCarte("Signature Pasta", 16.0, "With seafood and parsley sauce", "Soup & Pasta")); // ID: 8
+			menu.addAlaCarte(new AlaCarte("Chef Pasta", 18.5, "with stewed beef, thyme, and mushrooms", "Soup & Pasta")); // ID: 9
+			
+			menu.addAlaCarte(new AlaCarte("Veal Tournedos", 21.5, "With carrot and ginger flan", "Meat")); // ID: 10
+			menu.addAlaCarte(new AlaCarte("Flap Sirloin Beef", 23.75, "With celery root and mushrooms", "Meat")); // ID: 11
+			menu.addAlaCarte(new AlaCarte("Lamb Loin", 23.75, "With pepper, potato, and spicy green chicory", "Meat")); // ID: 12
+			
+			menu.addAlaCarte(new AlaCarte("Field Greens", 8.5, "Hydroponic vegetable salads", "Vegetarian Dishes")); // ID: 13
+			menu.addAlaCarte(new AlaCarte("Braised Tofu", 7.5, "With vegetable and Chinese mushrooms", "Vegetarian Dishes")); // ID: 14
+			
+			menu.addAlaCarte(new AlaCarte("Soya Milk", 3.0, "Fresh soya milk", "Drinks")); // ID: 15
+			menu.addAlaCarte(new AlaCarte("Fruit Juice", 3.5, "Apple, orange, mango, or kiwi juice", "Drinks")); // ID: 16
+			menu.addAlaCarte(new AlaCarte("Chinese Tea", 2.0, "Chrysanthemum", "Drinks")); // ID: 17
 			
 			// Adding Set Package
-			sp = new SetPackage("Package A", 4.99, "Package A is delicious");
-			sp.addAlaCarte(menu.getAlaCarteById(1));
+			sp = new SetPackage("Family Set", 62, "Package aimed for those coming with their family");
 			sp.addAlaCarte(menu.getAlaCarteById(2));
+			sp.addAlaCarte(menu.getAlaCarteById(6));
+			sp.addAlaCarte(menu.getAlaCarteById(7));
+			sp.addAlaCarte(menu.getAlaCarteById(10));
+			sp.addAlaCarte(menu.getAlaCarteById(13));
+			sp.addAlaCarte(menu.getAlaCarteById(17));
+			menu.addSetPackage(sp);
+			
+			sp = new SetPackage("Executive Set", 68, "Package aimed for company dinner with executives");
+			sp.addAlaCarte(menu.getAlaCarteById(1));
+			sp.addAlaCarte(menu.getAlaCarteById(6));
+			sp.addAlaCarte(menu.getAlaCarteById(8));
+			sp.addAlaCarte(menu.getAlaCarteById(12));
+			sp.addAlaCarte(menu.getAlaCarteById(14));
+			sp.addAlaCarte(menu.getAlaCarteById(13));
+			sp.addAlaCarte(menu.getAlaCarteById(16));
 			menu.addSetPackage(sp);
 			
 			// Adding Staffs
-			staffManager.addStaff(new Staff("Edwin", 123, "Male", "Founder"));
-			staffManager.addStaff(new Staff("Deka", 124, "Female", "Founder 2"));
+			staffManager.addStaff(new Staff("Edwin", 150, "Male", "Staff"));
+			staffManager.addStaff(new Staff("Deka", 324, "Female", "Staff"));
+			staffManager.addStaff(new Staff("Liling", 524, "Female", "Staff"));
+			staffManager.addStaff(new Staff("Yanhan", 12, "Male", "Staff"));
+			staffManager.addStaff(new Staff("Kenrick", 254, "Male", "Staff"));
 			*/
 			
 			// Variable Declaration
@@ -104,6 +151,10 @@ public class RestaurantApp
 				switch (choice) {
 				case 1: // Create/Update/Remove menu item
 					do {
+						// Save to database
+						// Always save any change in each iteration
+						Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");	
+						
 						menu.printMenu();
 						println("1. Create menu item");
 						println("2. Update menu item");
@@ -843,15 +894,11 @@ public class RestaurantApp
 				}
 				
 				println();
-				
-				// Save to database
-				// Always save any change in each iteration
-				Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");	
-				
+	
 			} while (1 <= choice && choice <= 10);
 			
 			// Close Scanner object
-			sc.close();
+			sc.close();	
 			
 		} else {
 			System.out.println("Error: Data is not succesfully fetched from the Database!");
