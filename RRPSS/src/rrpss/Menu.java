@@ -1,5 +1,6 @@
 package rrpss;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Vector;
 
 public class Menu implements Serializable {
@@ -79,6 +80,11 @@ public class Menu implements Serializable {
 	
 	public void printMenu () {
 		//Something like toString -> like a breakdown of what has been ordered
+		// TODO account for long name & description
+		
+		// sort by type
+		Collections.sort(alaCartes);
+		
 		System.out.println("                                                        MENU                                                         ");
 		System.out.println("=====================================================================================================================");
 		System.out.println(String.format("%-5s%-35s%-10s%-50s%-15s",

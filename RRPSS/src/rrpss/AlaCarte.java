@@ -1,6 +1,6 @@
 package rrpss;
 
-public class AlaCarte extends Item {
+public class AlaCarte extends Item implements Comparable<AlaCarte> {
 	private String type;
 	
 	public AlaCarte(String name, double price, String description, String type) {
@@ -21,5 +21,12 @@ public class AlaCarte extends Item {
 		ac.setId(this.id); // Since ID is not set in the constructor (purpose: to assign unique ID when an AlaCarte is created)
 		
 		return ac;
+	}
+	/**
+	 * This method is used for sorting the alacarte item by type at Menu class
+	 */
+	@Override
+	public int compareTo(AlaCarte ac) {
+		return this.type.compareTo(ac.type);
 	}
 }
