@@ -190,21 +190,21 @@ public class Order implements Serializable
 	{
 		//Something like toString -> like a breakdown of what has been ordered
 
-		System.out.println("                                 ORDER                                          ");
-		System.out.println("================================================================================");
-		System.out.println(String.format("%-3sid: %-4s status: %-8s staff: %-10s Date/time: %-22s",
+		System.out.println("                                                       ORDER                                                         ");
+		System.out.println("=====================================================================================================================");
+		System.out.println(String.format("%-5sid: %-5s status: %-20s staff: %-20s Date/time: %-30s",
 				" ", id, status, staff.getName(), getDateTimeString()));
-		System.out.println("================================================================================");
+		System.out.println("=====================================================================================================================");
 		
 		for (AlaCarte ac: alaCartes.keySet().toArray(new AlaCarte[0])) 
 		{
-			System.out.println(String.format("%-5s%-20s @%-8.2f x%-5d = %-10.2f",
+			System.out.println(String.format("%-5s%-50s @%-10.2f x%-5d = %-10.2f",
 					ac.id, ac.name, ac.price, alaCartes.get(ac), ac.price * alaCartes.get(ac)));
 		}
 		
 		for (SetPackage sp: setPackages.keySet().toArray(new SetPackage[0])) 
 		{
-			System.out.println(String.format("%-5s%-20s @%-8.2f x%-5d = %-10.2f",
+			System.out.println(String.format("%-5s%-50s @%-10.2f x%-5d = %-10.2f",
 					sp.id, sp.name, sp.price, setPackages.get(sp), sp.price * setPackages.get(sp)));
 		}
 		System.out.println();
