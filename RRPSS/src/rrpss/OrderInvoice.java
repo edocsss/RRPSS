@@ -97,20 +97,16 @@ public class OrderInvoice implements Serializable
 	public void printInvoice ()
 	{
 		//Print the order breakdown & dateTime from Order object
-
-		System.out.println
-							 ("================================================================================");
-		System.out.println(
-				String.format("                             ORDER INVOICE #%-5d                               ", order.getId()));
-		System.out.println(
-				String.format("                                TABLE #%-5d                                    ", tableId));
-
+		System.out.println("=====================================================================================================================");
+		System.out.println(String.format("                                               ORDER INVOICE #%-5d                                                 ", order.getId()));
+		System.out.println(String.format("                                                   TABLE #%-5d                                                     ", tableId));
+		
 		order.printOrder();
-		System.out.println(String.format("%-43s: %-5.2f", "Total price", this.totalPrice));
-		System.out.println(String.format("%-43s: %-5.2f", "Membership discount", this.totalDiscount));
-		System.out.println(String.format("%-43s: %-5.2f", "GST", this.totalGST));
-		System.out.println(String.format("%-43s: %-5.2f", "Grand total", this.grandTotal));
-		System.out.println("================================================================================");
+		System.out.println(String.format("%-75s: %-10.2f", "Total price", this.totalPrice));
+		System.out.println(String.format("%-75s: %-10.2f", "Membership discount", this.totalDiscount));
+		System.out.println(String.format("%-75s: %-10.2f", "GST", this.totalGST));
+		System.out.println(String.format("%-75s: %-10.2f", "Grand total", this.grandTotal));
+		System.out.println("=====================================================================================================================");
 		System.out.println();
 	}
 }

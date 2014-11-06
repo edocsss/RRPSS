@@ -25,7 +25,7 @@ public class RestaurantApp
 		Restaurant r = new Restaurant("The Lyked");
 		
 		// Read data from Database
-		r = Database.readRestaurantObject("Database//" + r.getName() + ".ser");
+		//r = Database.readRestaurantObject("Database//" + r.getName() + ".ser");
 		
 		// Only start the program if the initial data has been successfully fetched from Database
 		if (r != null) {
@@ -41,7 +41,7 @@ public class RestaurantApp
 			
 			Scanner sc = new Scanner(System.in);
 			
-			/*
+			
 			// Adding table
 			tableManager.addTable(2);
 			tableManager.addTable(4);
@@ -103,12 +103,11 @@ public class RestaurantApp
 			menu.addSetPackage(sp);
 			
 			// Adding Staffs
-			staffManager.addStaff(new Staff("Edwin", 150, "Male", "Staff"));
-			staffManager.addStaff(new Staff("Deka", 324, "Female", "Staff"));
 			staffManager.addStaff(new Staff("Liling", 524, "Female", "Staff"));
-			staffManager.addStaff(new Staff("Yanhan", 12, "Male", "Staff"));
-			staffManager.addStaff(new Staff("Kenrick", 254, "Male", "Staff"));
-			*/
+			staffManager.addStaff(new Staff("Yanhan", 123, "Male", "Staff"));
+			staffManager.addStaff(new Staff("Kenrick", 314, "Male", "Staff"));
+			staffManager.addStaff(new Staff("Deka", 324, "Female", "Staff"));
+			
 			
 			// Variable Declaration
 			int choice = 0, subChoice = 0, subChoice2 = 0;

@@ -78,8 +78,8 @@ public class RevenueReport
 	{
 		double totalDailyRevenue = 0.0;
 
-		System.out.println("                         DAILY REVENUE REPORT                                   ");
-		System.out.println("================================================================================");
+		System.out.println("                                                DAILY REVENUE REPORT                                                  ");
+		System.out.println("=====================================================================================================================");
 		
 		// Print the breakdown of the items for each invoice -> call printInvoice for each OrderInvoice object
 		for (OrderInvoice oI: dailyOrderInvoices) {
@@ -87,9 +87,9 @@ public class RevenueReport
 			totalDailyRevenue += oI.getGrandTotal();
 		}
 
-		System.out.println("================================================================================");
-		System.out.println(String.format("%-43s: %-5.2f", "Total daily revenue", totalDailyRevenue));
-		System.out.println("================================================================================");
+		System.out.println("=====================================================================================================================");
+		System.out.println(String.format("%-75s: %-10.2f", "Total daily revenue", totalDailyRevenue));
+		System.out.println("=====================================================================================================================");
 		System.out.println();
 	}
 	
@@ -115,8 +115,8 @@ public class RevenueReport
 		min = max = monthlyOrderInvoices.get(0).getTotalPrice();
 		minDateTime = maxDateTime = monthlyOrderInvoices.get(0).getOrder().getDateTimeString();
 		
-		System.out.println("                        MONTHLY REVENUE REPORT                                  ");
-		System.out.println("================================================================================");
+		System.out.println("                                               MONTHLY REVENUE REPORT                                                ");
+		System.out.println("=====================================================================================================================");
 		
 		for (OrderInvoice oI: monthlyOrderInvoices)
 		{
@@ -136,9 +136,9 @@ public class RevenueReport
 		}
 		
 		// Print max, min, and totalMonthlyRevenue here
-		System.out.println(String.format("%-43s: %-5.2f at %-22s", "Top sale", max, maxDateTime));
-		System.out.println(String.format("%-43s: %-5.2f at %-22s", "Least sale", min, minDateTime));
-		System.out.println(String.format("%-43s: %-5.2f", "Total monthly revenue", totalMonthlyRevenue));
-		System.out.println("================================================================================");
+		System.out.println(String.format("%-75s: %-10.2f at %-30s", "Top sale", max, maxDateTime));
+		System.out.println(String.format("%-75s: %-10.2f at %-30s", "Least sale", min, minDateTime));
+		System.out.println(String.format("%-75s: %-10.2f", "Total monthly revenue", totalMonthlyRevenue));
+		System.out.println("=====================================================================================================================");
 	}
 }
