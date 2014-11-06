@@ -126,6 +126,7 @@ public class RestaurantApp
 			
 			// "Real" start of the application
 			menu.printMenu();
+			// TODO put printMenu inside consistently: currently is spread here and there.
 			
 			do {
 				println("=================================================");
@@ -151,9 +152,6 @@ public class RestaurantApp
 				switch (choice) {
 				case 1: // Create/Update/Remove menu item
 					do {
-						// Save to database
-						// Always save any change in each iteration
-						Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");	
 						
 						menu.printMenu();
 						println("1. Create menu item");
@@ -894,6 +892,9 @@ public class RestaurantApp
 				}
 				
 				println();
+				// Save to database
+				// Always save any change in each iteration
+				Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");	
 	
 			} while (1 <= choice && choice <= 10);
 			
