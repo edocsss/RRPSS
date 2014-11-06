@@ -25,7 +25,7 @@ public class RestaurantApp
 		Restaurant r = new Restaurant("The Lyked");
 		
 		// Read data from Database
-		//r = Database.readRestaurantObject("Database//" + r.getName() + ".ser");
+		r = Database.readRestaurantObject("Database//" + r.getName() + ".ser");
 		
 		// Only start the program if the initial data has been successfully fetched from Database
 		if (r != null) {
@@ -41,7 +41,7 @@ public class RestaurantApp
 			
 			Scanner sc = new Scanner(System.in);
 			
-			
+			/*
 			// Adding table
 			tableManager.addTable(2);
 			tableManager.addTable(4);
@@ -107,7 +107,7 @@ public class RestaurantApp
 			staffManager.addStaff(new Staff("Yanhan", 123, "Male", "Staff"));
 			staffManager.addStaff(new Staff("Kenrick", 314, "Male", "Staff"));
 			staffManager.addStaff(new Staff("Deka", 324, "Female", "Staff"));
-			
+			*/
 			
 			// Variable Declaration
 			int choice = 0, subChoice = 0, subChoice2 = 0;
@@ -867,14 +867,14 @@ public class RestaurantApp
 					break;
 					
 				case 10: // Print sale revenue report by period (eg day or month)
-					// input period (day or month)
 					String period;
 					int check;
 					
+					// Input the revenue report period
 					print("Enter period (MMYYYY or DDMMYYYY): ");
 					period = sc.next();
 					
-					// Static method -> allows all restaurants to use this Class just to print the Revenue Report (expandability purpose)
+					// Print the report and check the return value (in case of error)
 					check = RevenueReport.printReport(period, orderInvoiceManager.getOrderInvoices());
 					if (check == -1)
 					{
@@ -892,10 +892,7 @@ public class RestaurantApp
 				}
 				
 				println();
-				// Save to database
-				// Always save any change in each iteration
-				Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");	
-	
+
 			} while (1 <= choice && choice <= 10);
 			
 			// Close Scanner object
