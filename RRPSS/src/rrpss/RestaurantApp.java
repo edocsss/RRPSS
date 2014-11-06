@@ -128,6 +128,10 @@ public class RestaurantApp
 			menu.printMenu();
 			
 			do {
+				// Save to database
+				// Always save any change in each iteration
+				Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");	
+				
 				println("=================================================");
 				println("Restaurant Reservation and Point of Sale System: ");
 				println("=================================================");
@@ -151,10 +155,6 @@ public class RestaurantApp
 				switch (choice) {
 				case 1: // Create/Update/Remove menu item
 					do {
-						// Save to database
-						// Always save any change in each iteration
-						Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");	
-						
 						menu.printMenu();
 						println("1. Create menu item");
 						println("2. Update menu item");
@@ -169,7 +169,6 @@ public class RestaurantApp
 						switch(subChoice) {
 						
 						// Add an Ala Carte
-						// TODO what if the name of the going-to-be-added AlaCarte item is the same as one of the item in the menu currently?
 						case 1:
 							print("\nEnter Ala Carte name: ");
 							name = sc.nextLine();
@@ -309,7 +308,6 @@ public class RestaurantApp
 						switch(subChoice) {
 						
 						// Add Set Package
-						// TODO what if the name of the going-to-be-added SetPackage item is the same as one of the item in the menu currently?
 						case 1:
 							print("\nEnter Set Package name: ");
 							name = sc.nextLine();
