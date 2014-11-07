@@ -112,7 +112,7 @@ public class RestaurantApp
 			// Variable Declaration
 			int choice = 0, subChoice = 0, subChoice2 = 0;
 			String name, description, type, membershipString, dateTimeString;
-			int id, tableId, staffId, quantity, contact, numPeople, reservationId;
+			int id, tableId, staffId, quantity, contact, numPeople, reservationId, ret;
 			boolean membership = false;
 			double price;
 			Table table;
@@ -128,10 +128,6 @@ public class RestaurantApp
 			// TODO put printMenu inside consistently: currently is spread here and there.
 			
 			do {
-				// Save to database
-				// Always save any change in each iteration
-				Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");	
-				
 				println("=================================================");
 				println("Restaurant Reservation and Point of Sale System: ");
 				println("=================================================");
@@ -892,6 +888,13 @@ public class RestaurantApp
 				}
 				
 				println();
+				
+				// Save to database
+				// Always save any change in each iteration
+				ret = Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");
+				if (ret == -1) {
+					System.out.println("Error: The data is not successfully written to the Database!");
+				}
 
 			} while (1 <= choice && choice <= 10);
 			

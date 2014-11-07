@@ -74,8 +74,8 @@ public class OrderManager implements Serializable
 	 * Returns the {@link Order} object with the specified ID attribute. If no such {@link Order} object
 	 * is found, return {@code null}.
 	 * 
-	 * @param 	orderId				An integer representing the ID of the {@link Order} object 
-	 * 								the user is looking for
+	 * @param 	orderId			The ID of the {@link Order} object (should be an ID of an existing {@link AlaCarte}
+	 * 							object)
 	 * @return	{@link Order}	The {@link Order} object which has the same ID as {@code orderId}
 	 */
 	public Order getOrderById (int orderId)

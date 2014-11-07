@@ -72,10 +72,18 @@ public class Order implements Serializable
 	// TODO JavaDoc for the remaining -> Constructor + Methods
 	// TODO Remove all methods which are not used by any class
 	/**
+	 * Constructs an {@link Order} object with ID, date and time when it is made, 
+	 * and {@link Staff} object indicating who created this object.
 	 * 
-	 * @param id
-	 * @param dateTime
-	 * @param staff
+	 * <p>
+	 * When an object is created, the {@link #status} is set to "Active" automatically.
+	 * The Vector {@link #alaCartes} and {@link #setPackages} are initialized without
+	 * any element. 
+	 * </p>
+	 * 
+	 * @param id		Distinguish one object with another
+	 * @param dateTime	Indicate when this object is created
+	 * @param staff		Indicate who created this object
 	 */
 	public Order (int id, Calendar dateTime, Staff staff)
 	{
@@ -88,8 +96,9 @@ public class Order implements Serializable
 	}
 	
 	/**
+	 * Set the {@link #id} attribute with the specified value.
 	 * 
-	 * @param id
+	 * @param id	An integer used to set the {@link #id} attribute 
 	 */
 	public void setId (int id)
 	{
@@ -97,79 +106,76 @@ public class Order implements Serializable
 	}
 	
 	/**
+	 * Set the {@link #status} attribute to the specified String argument.
 	 * 
-	 * @param hour
-	 * @param minute
-	 * @param second
-	 */
-	public void setTime (int hour, int minute, int second)
-	{
-		this.dateTime.set(Calendar.HOUR_OF_DAY, hour);
-		this.dateTime.set(Calendar.MINUTE, minute);
-		this.dateTime.set(Calendar.SECOND, second);
-	}
-	
-	/**
-	 * 
-	 * @param day
-	 * @param month
-	 * @param year
-	 */
-	public void setDate (int day, int month, int year)
-	{
-		this.dateTime.set(Calendar.DAY_OF_MONTH, day);
-		this.dateTime.set(Calendar.MONTH, month - 1);
-		this.dateTime.set(Calendar.YEAR, year);
-	}
-	
-	/**
-	 * 
-	 * @param status
+	 * @param status	String used to set the {@link #status} attribute (must be "Active" or "Closed")
 	 */
 	public void setStatus (String status)
 	{
 		this.status = status;
 	}
 
-	// Use table number to get the Order object and addOrderItem to the list
-	// Get OrderItem from the MainApp
 	/**
+	 * Add an {@link AlaCarte} object ordered by the customer to the attribute {@link #alaCartes}.
 	 * 
-	 * @param alaCarte
-	 * @param quantity
+	 * <p>
+	 * The method first checks whether the specified {@link AlaCarte} object has already been inside
+	 * the {@link #alaCartes} attribute.
+	 * <br>
+	 * If it is, then this method only update the quantity of that particular {@link AlaCarte} object
+	 * If it is not, then this method create a new entry in {@link #alaCartes} attribute with the specified quantity.
+	 * </p>
+	 * 
+	 * @param alaCarte	An {@link AlaCarte} object which is added to {@link #alaCartes}
+	 * @param quantity	An integer indicating the quantity of the ordered item (must be a positive integer)
 	 */
 	public void addAlaCarte (AlaCarte alaCarte, int quantity)
 	{
 		AlaCarte ac = getAlaCarteByItemId(alaCarte.getId());
-		if (ac != null) {
+		
+		// If the AlaCarte is already inside the HashMap, update the quantity only
+		if (ac != null) 
+		{
 			alaCartes.put(ac, alaCartes.get(ac) + quantity);
-		} else {
+		} 
+		// If not, put a new entry with ac as the key and quantity as the value
+		else 
+		{
 			alaCartes.put(alaCarte, quantity);
 		}
 	}
 	
 	/**
+	 * Return {@link AlaCarte} object with the specified ID. If no such {@link AlaCarte} object is found,
+	 * this method returns {@code null}.
 	 * 
-	 * @param itemId
-	 * @return
+	 * @param 	itemId	The ID of an {@link AlaCarte} object that is looked for (should be an ID of an existing {@link AlaCarte}
+	 * 					object)
+	 * @return			{@link AlaCarte} object with the specified ID or {@code null} if no such object is found.
 	 */
 	private AlaCarte getAlaCarteByItemId (int itemId)
 	{
+		// Array of alaCartes HashMap keys
 		AlaCarte[] acs = this.alaCartes.keySet().toArray(new AlaCarte[0]);
-		
+
+		// Search through the keys to get the AlaCarte object with the specified ID
 		for (AlaCarte ac: acs) {
 			if (ac.getId() == itemId) {
 				return ac;
 			}
 		}
 		
+		// Return null if no such AlaCarte object is found
 		return null;
 	}
 	
 	/**
+	 * Remove an {@link AlaCarte} object with the specified ID.
 	 * 
-	 * @param itemId
-	 * @return
+	 * @param 	itemId	The ID of the {@link AlaCarte} object to be removed (should be an ID of an existing {@link AlaCarte}
+	 * 					object)
+	 * @return			{@code 1} if the targeted {@link AlaCArte} object is successfully removed
+	 * 					or {@code -1} otherwise
 	 */
 	public int removeAlaCarteByItemId (int itemId)
 	{
@@ -187,47 +193,58 @@ public class Order implements Serializable
 	}
 	
 	/**
+	 * Returns the {@link AlaCarte} objects.
 	 * 
-	 * @param alaCarte
-	 */
-	public void removeAlaCarte (AlaCarte alaCarte)
-	{
-		this.alaCartes.remove(alaCarte);
-	}
-	
-	/**
-	 * 
-	 * @return
+	 * @return The {@link AlaCarte} objects
 	 */
 	public HashMap<AlaCarte, Integer> getAlaCartes()
 	{
 		return this.alaCartes;
 	}
 	
-	/**
+	/**Add an {@link SetPackage} object ordered by the customer to the attribute {@link #setPackages}.
 	 * 
-	 * @param setPackage
-	 * @param quantity
-	 */
+	 * <p>
+	 * The method first checks whether the specified {@link SetPackage} object has already been inside
+	 * the {@link #setPackages} attribute.
+	 * <br>
+	 * If it is, then this method only update the quantity of that particular {@link SetPackage} object
+	 * If it is not, then this method create a new entry in {@link #setPackages} attribute with the specified quantity.
+	 * </p>
+	 * 
+	 * @param alaCarte	An {@link SetPackage} object which is added to {@link #setPackages}
+	 * @param quantity	An integer indicating the quantity of the ordered item (must be a positive integer)
+	 */ 
 	public void addSetPackage (SetPackage setPackage, int quantity)
 	{
 		SetPackage sp = getSetPackageByItemId(setPackage.getId());
-		if (sp != null) {
+		
+		// If the SetPackage is already inside the HashMap, update the quantity only
+		if (sp != null) 
+		{
 			setPackages.put(sp, setPackages.get(sp) + quantity);
-		} else {
+		}
+		// If not, put a new entry with ac as the key and quantity as the value
+		else 
+		{
 			setPackages.put(setPackage, quantity);
 		}
 	}
 	
 	/**
+	 * Return {@link SetPackage} object with the specified ID. If no such {@link SetPackage} object is found,
+	 * this method returns {@code null}.
 	 * 
-	 * @param itemId
-	 * @return
+	 * @param 	itemId	The ID of an {@link SetPackage} object that is looked for (should be an ID of an existing {@link SetPackage}
+	 * 					object)
+	 * @return			{@link SetPackage} object with the specified ID or {@code null} if no such object is found.
 	 */
 	private SetPackage getSetPackageByItemId (int itemId)
 	{
+		// Array of alaCartes HashMap keys
 		SetPackage[] acs = this.setPackages.keySet().toArray(new SetPackage[0]);
 		
+		// Search through the keys to get the AlaCarte object with the specified ID
 		for (SetPackage ac: acs) 
 		{
 			if (ac.getId() == itemId) 
@@ -240,9 +257,12 @@ public class Order implements Serializable
 	}
 	
 	/**
+	 * Remove an {@link SetPackage} object with the specified ID.
 	 * 
-	 * @param itemId
-	 * @return
+	 * @param itemId 	(should be an ID of an existing {@link SetPackage}
+	 * 				  	object)
+	 * @return			{@code 1} if the targeted {@link AlaCArte} object is successfully removed
+	 * 					or {@code -1} otherwise
 	 */
 	public int removeSetPackageByItemId (int itemId)
 	{
@@ -257,17 +277,9 @@ public class Order implements Serializable
 	}
 	
 	/**
+	 * Returns the {@link SetPackage} objects.
 	 * 
-	 * @param setPackage
-	 */
-	public void removeSetPackage (SetPackage setPackage)
-	{
-		this.setPackages.remove(setPackage);
-	}
-	
-	/**
-	 * 
-	 * @return
+	 * @return The {@link SetPackage} objects
 	 */
 	public HashMap<SetPackage, Integer> getSetPackages()
 	{
@@ -275,17 +287,9 @@ public class Order implements Serializable
 	}
 	
 	/**
+	 * Returns the {@link #id} of this object
 	 * 
-	 * @param staff
-	 */
-	public void setStaff (Staff staff)
-	{
-		this.staff = staff;
-	}
-	
-	/**
-	 * 
-	 * @return
+	 * @return The {@link #id} of this object
 	 */
 	public int getId ()
 	{
@@ -293,8 +297,9 @@ public class Order implements Serializable
 	}
 	
 	/**
+	 * Returns the {@link #dateTime} of this object.
 	 * 
-	 * @return
+	 * @return The {@link #dateTime} of this object.
 	 */
 	public Calendar getDateTime ()
 	{
@@ -302,8 +307,9 @@ public class Order implements Serializable
 	}
 	
 	/**
+	 * Returns the {@link #staff} of this object
 	 * 
-	 * @return
+	 * @return 
 	 */
 	public Staff getStaff ()
 	{
@@ -311,17 +317,9 @@ public class Order implements Serializable
 	}
 
 	/**
+	 * Return the {@link #dateTime} in a formatted String.
 	 * 
-	 * @return
-	 */
-	public String getStatus ()
-	{
-		return this.status;
-	}
-	
-	/**
-	 * 
-	 * @return
+	 * @return A formatted String representing {@link #dateTime}
 	 */
 	public String getDateTimeString() {
 		return this.dateTime.get(Calendar.DAY_OF_MONTH) + " "
@@ -333,7 +331,8 @@ public class Order implements Serializable
 	}
 	
 	/**
-	 * 
+	 * Print the breakdown of items of this {@link Order} object. This method prints all
+	 * Ala Carte and Set Package items details including the price and the quantity.
 	 */
 	public void printOrder ()
 	{
