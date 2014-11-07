@@ -5,10 +5,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
-/*
- * Order status = Active or Closed
- */
-
 /**
  * Stores all important information of an order created for a customer. This class stores
  * the ID, date and time of the {@link Order} object creation, the {@link Staff} 
@@ -68,9 +64,6 @@ public class Order implements Serializable
 	 */
 	private HashMap<SetPackage, Integer> setPackages;
 	
-	
-	// TODO JavaDoc for the remaining -> Constructor + Methods
-	// TODO Remove all methods which are not used by any class
 	/**
 	 * Constructs an {@link Order} object with ID, date and time when it is made, 
 	 * and {@link Staff} object indicating who created this object.
@@ -181,10 +174,12 @@ public class Order implements Serializable
 	{
 		AlaCarte ac = this.getAlaCarteByItemId(itemId);
 		
+		// Unsuccessful
 		if (ac == null) 
 		{
 			return -1;
 		} 
+		// Successful
 		else 
 		{
 			this.alaCartes.remove(ac);
@@ -268,9 +263,14 @@ public class Order implements Serializable
 	{
 		SetPackage sp = this.getSetPackageByItemId(itemId);
 		
-		if (sp == null) {
+		// Unsuccessful
+		if (sp == null) 
+		{
 			return -1;
-		} else {
+		} 
+		// Successful
+		else 
+		{
 			this.setPackages.remove(sp);
 			return 1;
 		}
