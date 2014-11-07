@@ -9,17 +9,73 @@ import java.util.Locale;
  * Order status = Active or Closed
  */
 
+/**
+ * Stores all important information of an order created for a customer. This class stores
+ * the ID, date and time of the {@link Order} object creation, the {@link Staff} 
+ * object who created the {@link Order}, and the most important thing is the menu item
+ * the customer ordered.
+ * 
+ * @author Edwin Candinegara
+ * @see Serializable
+ * @see HashMap
+ * @see Staff
+ */
 public class Order implements Serializable 
 {
+	/**
+	 * Distinguish one object with another. This attribute is assigned in 
+	 * {@link OrderManager#createOrder(Calendar, Staff) createOrder(Calendar, Staff)} from
+	 * {@link OrderManager} class.
+	 */
 	private int id;
+	
+	/**
+	 * Specify when this object is created. This attribute is assigned in 
+	 * {@link OrderManager#createOrder(Calendar, Staff) createOrder(Calendar, Staff)} from 
+	 * {@link OrderManager} class.
+	 */
 	private Calendar dateTime;
+	
+	/**
+	 * Specify the status of this object.
+	 * 
+	 * <p>
+	 * There are 2 type of status.
+	 * <ul>
+	 * <li>Active</li>
+	 * <li>Closed</li>
+	 * </ul>
+	 * </p>
+	 */
 	private String status;
-	private Staff staff; // (e)
+	
+	/**
+	 * Specify the {@link Staff Staff} who created this {@code Order} object.
+	 */
+	private Staff staff;
+	
+	/**
+	 * A {@link HashMap HashMap} used to store all {@link AlaCarte} objects
+	 * ordered by the customer. The key is the {@link AlaCarte} object and
+	 * the value associated is the quantity.
+	 */
 	private HashMap<AlaCarte, Integer> alaCartes;
+	
+	/**
+	 * A {@link HashMap HashMap} used to store all {@link SetPackage} objects
+	 * ordered by the customer. The key is the {@link SetPackage} object and
+	 * the value associated is the quantity.
+	 */
 	private HashMap<SetPackage, Integer> setPackages;
 	
-	/*
-	 * Customer, Calendar -> from App
+	
+	// TODO JavaDoc for the remaining -> Constructor + Methods
+	// TODO Remove all methods which are not used by any class
+	/**
+	 * 
+	 * @param id
+	 * @param dateTime
+	 * @param staff
 	 */
 	public Order (int id, Calendar dateTime, Staff staff)
 	{
@@ -31,11 +87,21 @@ public class Order implements Serializable
 		this.setPackages = new HashMap<SetPackage, Integer> ();
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 */
 	public void setId (int id)
 	{
 		this.id = id;
 	}
 	
+	/**
+	 * 
+	 * @param hour
+	 * @param minute
+	 * @param second
+	 */
 	public void setTime (int hour, int minute, int second)
 	{
 		this.dateTime.set(Calendar.HOUR_OF_DAY, hour);
@@ -43,6 +109,12 @@ public class Order implements Serializable
 		this.dateTime.set(Calendar.SECOND, second);
 	}
 	
+	/**
+	 * 
+	 * @param day
+	 * @param month
+	 * @param year
+	 */
 	public void setDate (int day, int month, int year)
 	{
 		this.dateTime.set(Calendar.DAY_OF_MONTH, day);
@@ -50,6 +122,10 @@ public class Order implements Serializable
 		this.dateTime.set(Calendar.YEAR, year);
 	}
 	
+	/**
+	 * 
+	 * @param status
+	 */
 	public void setStatus (String status)
 	{
 		this.status = status;
@@ -57,6 +133,11 @@ public class Order implements Serializable
 
 	// Use table number to get the Order object and addOrderItem to the list
 	// Get OrderItem from the MainApp
+	/**
+	 * 
+	 * @param alaCarte
+	 * @param quantity
+	 */
 	public void addAlaCarte (AlaCarte alaCarte, int quantity)
 	{
 		AlaCarte ac = getAlaCarteByItemId(alaCarte.getId());
@@ -67,6 +148,11 @@ public class Order implements Serializable
 		}
 	}
 	
+	/**
+	 * 
+	 * @param itemId
+	 * @return
+	 */
 	private AlaCarte getAlaCarteByItemId (int itemId)
 	{
 		AlaCarte[] acs = this.alaCartes.keySet().toArray(new AlaCarte[0]);
@@ -80,6 +166,11 @@ public class Order implements Serializable
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param itemId
+	 * @return
+	 */
 	public int removeAlaCarteByItemId (int itemId)
 	{
 		AlaCarte ac = this.getAlaCarteByItemId(itemId);
@@ -95,16 +186,29 @@ public class Order implements Serializable
 		}
 	}
 	
+	/**
+	 * 
+	 * @param alaCarte
+	 */
 	public void removeAlaCarte (AlaCarte alaCarte)
 	{
 		this.alaCartes.remove(alaCarte);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public HashMap<AlaCarte, Integer> getAlaCartes()
 	{
 		return this.alaCartes;
 	}
 	
+	/**
+	 * 
+	 * @param setPackage
+	 * @param quantity
+	 */
 	public void addSetPackage (SetPackage setPackage, int quantity)
 	{
 		SetPackage sp = getSetPackageByItemId(setPackage.getId());
@@ -115,6 +219,11 @@ public class Order implements Serializable
 		}
 	}
 	
+	/**
+	 * 
+	 * @param itemId
+	 * @return
+	 */
 	private SetPackage getSetPackageByItemId (int itemId)
 	{
 		SetPackage[] acs = this.setPackages.keySet().toArray(new SetPackage[0]);
@@ -130,6 +239,11 @@ public class Order implements Serializable
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param itemId
+	 * @return
+	 */
 	public int removeSetPackageByItemId (int itemId)
 	{
 		SetPackage sp = this.getSetPackageByItemId(itemId);
@@ -142,41 +256,73 @@ public class Order implements Serializable
 		}
 	}
 	
+	/**
+	 * 
+	 * @param setPackage
+	 */
 	public void removeSetPackage (SetPackage setPackage)
 	{
 		this.setPackages.remove(setPackage);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public HashMap<SetPackage, Integer> getSetPackages()
 	{
 		return this.setPackages;
 	}
 	
+	/**
+	 * 
+	 * @param staff
+	 */
 	public void setStaff (Staff staff)
 	{
 		this.staff = staff;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId ()
 	{
 		return this.id;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Calendar getDateTime ()
 	{
 		return this.dateTime;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Staff getStaff ()
 	{
 		return this.staff;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getStatus ()
 	{
 		return this.status;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getDateTimeString() {
 		return this.dateTime.get(Calendar.DAY_OF_MONTH) + " "
 				+ this.dateTime.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH) + " "
@@ -186,10 +332,11 @@ public class Order implements Serializable
 				+ this.dateTime.get(Calendar.SECOND);
 	}
 	
+	/**
+	 * 
+	 */
 	public void printOrder ()
 	{
-		//Something like toString -> like a breakdown of what has been ordered
-
 		System.out.println("                                                       ORDER                                                         ");
 		System.out.println("=====================================================================================================================");
 		System.out.println(String.format("%-5sid: %-5s status: %-20s staff: %-20s Date/time: %-30s",
@@ -207,6 +354,7 @@ public class Order implements Serializable
 			System.out.println(String.format("%-5s%-50s @%-10.2f x%-5d = %-10.2f",
 					sp.id, sp.name, sp.price, setPackages.get(sp), sp.price * setPackages.get(sp)));
 		}
+		
 		System.out.println();
 	}
 	

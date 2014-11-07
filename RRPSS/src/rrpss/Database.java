@@ -3,8 +3,8 @@ package rrpss;
 import java.io.*;
 
 /**
- * Stores and retrieves serialized {@link Restaurant Restaurant} object. 
- * This class uses FileInputStream class and ObjectInputStream class in order to read an object from a ".ser" file.
+ * Stores and retrieves serialized {@link Restaurant} object. 
+ * This class uses {@link FileInputStream} class and {@link ObjectInputStream} class in order to read an object from a ".ser" file.
  * For the purpose of writing a serialized object into a ".ser" file, FileOutputStream and ObjectInputStream class are used.
  * 
  * <p>
@@ -22,7 +22,12 @@ import java.io.*;
 public final class Database
 {
 	/**
-	 * Constructs nothing. This class does not have to be instantiated to read and write a serialized object.
+	 * Constructs nothing as this class does not have to be instantiated to read and write a serialized object.
+	 * 
+	 * <p>
+	 * This class only needs to get the {@code path} where the ".ser" file is to read or write a serialized object.
+	 * In the case of writing object, the object to be written into the ".ser" file is also needed.
+	 * </p>
 	 */
 	private Database () {}
 	
@@ -36,22 +41,21 @@ public final class Database
 	 * <p>
 	 * Exceptions which may occur during data reading include:
 	 * <ul>
-	 * <li>{@link ClassNotFoundException}</li>
-	 * <li>{@link StreamCorruptedException}</li>
-	 * <li>{@link InvalidClassException}</li>
-	 * <li>{@link OptionalDataException}</li>
-	 * <li>{@link IOException}</li>
+	 * <li>ClassNotFoundException</li>
+	 * <li>StreamCorruptedException</li>
+	 * <li>InvalidClassException</li>
+	 * <li>OptionalDataException</li>
+	 * <li>IOException}</li>
 	 * </ul>
 	 * <br>
 	 * All exceptions have been handled inside the method.
 	 * <br>
-	 * If there is no exception, the {@link Restaurant Restaurant} object inside the ".ser" file will be returned.
+	 * If there is no exception, the {@link Restaurant} object inside the ".ser" file will be returned.
 	 * Otherwise, {@code null}.
 	 * </p>
 	 * 
 	 * @param 	path 	a relative path to the project folder where the ".ser" file resides
-	 * @return 			the {@link Restaurant Restaurant} object inside the ".ser" file if it is found, {@code null} otherwise
-	 * @see 			Restaurant
+	 * @return 			the {@link Restaurant} object inside the ".ser" file if it is found, {@code null} otherwise
 	 * @see 			FileInputStream
 	 * @see 			ObjectInputStream
 	 */
@@ -105,10 +109,10 @@ public final class Database
 	}
 	
 	/**
-	 * Write a {@link Restaurant Restaurant} object to a ".ser" file stored in the given path.
+	 * Write a {@link Restaurant} object to a ".ser" file stored in the given path.
 	 * 
 	 * <p>
-	 * If the {@link Restaurant Restaurant} object passed in through the argument is null, return {@code -1}. 
+	 * If the {@link Restaurant} object passed in through the argument is null, return {@code -1}. 
 	 * </p>
 	 * 
 	 * <p>
@@ -118,9 +122,9 @@ public final class Database
 	 * <p>
 	 * Exceptions which may occur during data reading include:
 	 * <ul>
-	 * <li>{@link InvalidClassException}</li>
-	 * <li>{@link NotSerializableException}</li>
-	 * <li>{@link IOException}</li>
+	 * <li>InvalidClassException</li>
+	 * <li>NotSerializableException</li>
+	 * <li>IOException</li>
 	 * </ul>
 	 * <br>
 	 * All exceptions have been handled inside the method.
@@ -131,7 +135,6 @@ public final class Database
 	 * @param 	r		the {@link Restaurant Restaurant} object to be serialized
 	 * @param 	path	a relative path to the project folder where the ".ser" file will be written 
 	 * @return			{@code 1} if the serialization is successful and {@code -1} otherwise
-	 * @see 			Restaurant
 	 * @see 			FileOutputStream
 	 * @see 			ObjectOutputStream
 	 */

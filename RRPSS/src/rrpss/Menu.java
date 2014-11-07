@@ -11,7 +11,7 @@ public class Menu implements Serializable {
 	public Menu() {
 		alaCartes = new Vector<AlaCarte>();
 		setPackages = new Vector<SetPackage>();
-		idCounter = 0;
+		idCounter = 1;
 	}
 	
 	public Vector<AlaCarte> getAlaCartes() {
@@ -45,12 +45,12 @@ public class Menu implements Serializable {
 	}
 	
 	public void addAlaCarte(AlaCarte ac) {
-		ac.setId(idCounter++ + 1);
+		ac.setId(idCounter++);
 		alaCartes.add(ac);
 	}
 	
 	public void addSetPackage(SetPackage sp) {
-		sp.setId(idCounter++ + 1);
+		sp.setId(idCounter++);
 		setPackages.add(sp);
 	}
 	

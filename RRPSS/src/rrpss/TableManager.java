@@ -10,7 +10,7 @@ public class TableManager implements Serializable {
 	
 	public TableManager() {
 		tables = new Vector <Table> ();
-		numTables = 0;
+		numTables = 1;
 	}
 	
 	public Vector <Table> getTables() {
@@ -18,7 +18,7 @@ public class TableManager implements Serializable {
 	}
 	
 	public void addTable(int capacity) {
-		int id = numTables++ + 1;
+		int id = numTables++;
 		tables.add(new Table(id, capacity));
 	}
 	

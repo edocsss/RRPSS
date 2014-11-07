@@ -13,7 +13,7 @@ public class ReservationManager implements Serializable {
 	
 	public ReservationManager() {
 		this.reservations = new Vector<Reservation>();
-		this.idCounter = 0;
+		this.idCounter = 1;
 	}
 
 	/**
@@ -34,12 +34,12 @@ public class ReservationManager implements Serializable {
 		}
 		
 		//Get the Reservation ID based on the Vector size()
-		int id = this.idCounter + 1;
+		int id = this.idCounter++;
 			
 		//Create and add a new Reservation() object based on the customer object and the table object
 		Reservation reservation = new Reservation(dateTime, table, id, customer);
-		this.idCounter++;
 		
+		// Store the reservation
 		reservations.add(reservation);
 		
 		return id;
