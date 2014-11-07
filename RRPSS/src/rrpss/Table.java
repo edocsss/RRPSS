@@ -71,7 +71,7 @@ public class Table implements Comparable<Table>, Serializable {
 	
 	/**
 	 * Returns an {@link Order} object that is currently associated with this table.
-	 * @return
+	 * @return	an {@link Order} object that is currently associated with this table.
 	 */
 	public Order getOrder() {
 		return order;
@@ -112,6 +112,9 @@ public class Table implements Comparable<Table>, Serializable {
 	/**
 	 * Compare to other {@link Table} object by capacity.
 	 * Used for sorting the table by capacity at {@link TableManager}.
+	 * @return	<li>1 if this table capacity is larger</li>
+	 * 			<li>0 if equal capacity</li>
+	 * 			<li>-1 if the parameter's table capacity is larger.</li>
 	 */
 	@Override
 	public int compareTo(Table table) {
