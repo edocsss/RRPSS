@@ -46,7 +46,8 @@ public class RevenueReport
 	 * If {@code period} is given has the wrong format, this method returns {@code -2}.
 	 * </p>
 	 * 
-	 * @param 	period			A String indicating the period of the revenue report to be printed
+	 * @param 	period			A String indicating the period of the revenue report to be printed (must follow the format
+	 * 							DDMMYYYY or MMYYYY for daily and monthly respectively)
 	 * @param 	orderInvoices	A Vector containing all order invoices of a {@link Restaurant} object
 	 * @return					{@code 1} if the revenue report is successfully printed, {@code -1} if there is no order 
 	 * 							invoice with the specified date or month, and {@code -2} if the given period String input 
@@ -91,6 +92,7 @@ public class RevenueReport
 			}
 			else
 			{
+				// Print daily report
 				printReportByDay(dailyOrderInvoices);
 				return 1;
 			}
@@ -123,6 +125,7 @@ public class RevenueReport
 					return -2;
 				}
 			}
+			
 			// No order invoice has the specified month
 			if (monthlyOrderInvoices.size() == 0)
 			{
@@ -130,6 +133,7 @@ public class RevenueReport
 			}
 			else
 			{
+				// Print monthly report
 				printReportByMonth(monthlyOrderInvoices);
 				return 1;
 			}
