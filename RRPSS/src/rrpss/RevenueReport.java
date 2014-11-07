@@ -92,6 +92,7 @@ public class RevenueReport
 			}
 			else
 			{
+				// Print daily report
 				printReportByDay(dailyOrderInvoices);
 				return 1;
 			}
@@ -132,6 +133,7 @@ public class RevenueReport
 			}
 			else
 			{
+				// Print monthly report
 				printReportByMonth(monthlyOrderInvoices);
 				return 1;
 			}

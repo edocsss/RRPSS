@@ -13,7 +13,7 @@ import java.io.*;
  * </p>
  * 
  * <p>
- * <b>Warning:</b> All classes which are serialized must implement the {@link Serializable} interface!
+ * <b>Note:</b> All classes which are going to be serialized must implement the {@link Serializable} interface!
  * </p>
  * 
  * @author Edwin Candinegara
@@ -35,7 +35,7 @@ public final class Database
 	 * Read a serialized object from a ".ser" file from the given path. 
 	 * 
 	 * <p>
-	 * <b>Warning:</b> All classes which are serialized must implement the {@link Serializable} interface!
+	 * <b>Note:</b> All classes which are serialized must implement the {@link Serializable} interface!
 	 * </p>
 	 * 
 	 * <p>
@@ -54,8 +54,8 @@ public final class Database
 	 * Otherwise, {@code null}.
 	 * </p>
 	 * 
-	 * @param 	path 	a relative path to the project folder where the ".ser" file resides
-	 * @return 			the {@link Restaurant} object inside the ".ser" file if it is found, {@code null} otherwise
+	 * @param 	path 	A relative path to the project folder where the ".ser" file resides
+	 * @return 			The {@link Restaurant} object inside the ".ser" file if it is found, {@code null} otherwise
 	 * @see 			FileInputStream
 	 * @see 			ObjectInputStream
 	 */
@@ -116,7 +116,7 @@ public final class Database
 	 * </p>
 	 * 
 	 * <p>
-	 * <b>Warning:</b> All classes which are serialized must implement the {@link Serializable} interface!
+	 * <b>Note:</b> All classes which are going to be serialized must implement the {@link Serializable} interface!
 	 * </p>
 	 * 
 	 * <p>
@@ -132,8 +132,8 @@ public final class Database
 	 * If there is no exception, {@code 1} will be returned.
 	 * Otherwise, {@code -1}.
 	 * 
-	 * @param 	r		the {@link Restaurant Restaurant} object to be serialized
-	 * @param 	path	a relative path to the project folder where the ".ser" file will be written 
+	 * @param 	r		The {@link Restaurant Restaurant} object to be serialized
+	 * @param 	path	A relative path to the project folder where the ".ser" file will be written 
 	 * @return			{@code 1} if the serialization is successful and {@code -1} otherwise
 	 * @see 			FileOutputStream
 	 * @see 			ObjectOutputStream

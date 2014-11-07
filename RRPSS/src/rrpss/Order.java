@@ -11,10 +11,13 @@ import java.util.Locale;
  * object who created the {@link Order}, and the most important thing is the menu item
  * the customer ordered.
  * 
+ * <p>
+ * This class implements the {@link Serializable} interface as this object may be saved
+ * into a ".ser" file during the application execution.
+ * </p>
+ * 
  * @author Edwin Candinegara
  * @see Serializable
- * @see HashMap
- * @see Staff
  */
 public class Order implements Serializable 
 {
@@ -309,7 +312,7 @@ public class Order implements Serializable
 	/**
 	 * Returns the {@link #staff} of this object
 	 * 
-	 * @return 
+	 * @return {@link #staff} attribute of this object
 	 */
 	public Staff getStaff ()
 	{
@@ -342,12 +345,14 @@ public class Order implements Serializable
 				" ", id, status, staff.getName(), getDateTimeString()));
 		System.out.println("=====================================================================================================================");
 		
+		// Print AlaCarte objects
 		for (AlaCarte ac: alaCartes.keySet().toArray(new AlaCarte[0])) 
 		{
 			System.out.println(String.format("%-5s%-50s @%-10.2f x%-5d = %-10.2f",
 					ac.id, ac.name, ac.price, alaCartes.get(ac), ac.price * alaCartes.get(ac)));
 		}
 		
+		// Print SetPackage objects
 		for (SetPackage sp: setPackages.keySet().toArray(new SetPackage[0])) 
 		{
 			System.out.println(String.format("%-5s%-50s @%-10.2f x%-5d = %-10.2f",

@@ -13,6 +13,11 @@ import java.util.Vector;
  * is to manage all things related to {@link Order} creation.
  * </p>
  * 
+ * <p>
+ * This class implements the {@link Serializable} interface as this object may be saved
+ * into a ".ser" file during the application execution.
+ * </p>
+ * 
  * @author 	Edwin Candinegara
  * @see	 	Serializable
  *
@@ -76,7 +81,7 @@ public class OrderManager implements Serializable
 	 * 
 	 * @param 	orderId			The ID of the {@link Order} object (should be an ID of an existing {@link AlaCarte}
 	 * 							object)
-	 * @return	{@link Order}	The {@link Order} object which has the same ID as {@code orderId}
+	 * @return	The {@link Order} object which has the same ID as {@code orderId}
 	 */
 	public Order getOrderById (int orderId)
 	{
