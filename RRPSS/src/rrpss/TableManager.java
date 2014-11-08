@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Vector;
 
 /**
- * Manages the table of the {@link Restaurant} by providing getters of the list of tables and individual table,
+ * Manages the {@link Table} of the {@link Restaurant} by providing getters of the list of tables and individual table,
  * various methods to add new table, remove existing table, and allocate table for an order.
  * 
  * @author 	Kenrick
@@ -20,7 +20,7 @@ public class TableManager implements Serializable {
 	private Vector <Table> tables;
 	
 	/**
-	 * Number of tables, which is equal to the size of {@code tables} vector.
+	 * Number of tables, which is equal to the size of {@link TableManager#tables tables} vector.
 	 */
 	private int numTables;
 	
@@ -81,7 +81,7 @@ public class TableManager implements Serializable {
 	}
 	
 	/**
-	 * Sort the entries inside {@code tables} by capacity using {@code {@link Collections}.sort}
+	 * Sorts the entries inside {@code tables} by capacity using {@link Collections#sort Collections.sort}
 	 * by implementing {@link Comparable} class in {@link Table} class
 	 * and having a compareTo method inside {@link Table} class.
 	 */

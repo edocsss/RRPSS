@@ -155,9 +155,7 @@ public class RestaurantApp
 			Calendar dateTime = new GregorianCalendar();
 			
 			// ======== "Real" start of the application ======== //
-			
-			// Print menu
-			menu.printMenu();			
+						
 			do {
 				println("=================================================");
 				println("Restaurant Reservation and Point of Sale System: ");
@@ -885,7 +883,7 @@ public class RestaurantApp
 					} 
 					// If not full, create the reservation
 					else {
-						reservationId = reservationManager.createReservation(customer, dateTime, table, numPeople);
+						reservationId = reservationManager.createReservation(customer, dateTime, table);
 						
 						// Error checking
 						if (reservationId != -1) {

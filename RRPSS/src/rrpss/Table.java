@@ -78,14 +78,6 @@ public class Table implements Comparable<Table>, Serializable {
 	}
 	
 	/**
-	 * Sets this table's id (table number). Should be unique across other tables.
-	 * @param id	Positive integer representing the table number.
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	/**
 	 * Associates this table to a particular {@link Order}.
 	 * @param o		An active {@link Order}.
 	 */
@@ -99,14 +91,6 @@ public class Table implements Comparable<Table>, Serializable {
 	 */
 	public void setAvailability(boolean availability) {
 		this.availability = availability;
-	}
-	
-	/**
-	 * Sets this table's capacity. Should be a positive even integer between 2 and 10, inclusively.
-	 * @param capacity	Positive even integer between 2 and 10, inclusively.
-	 */
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
 	}
 	
 	/**
