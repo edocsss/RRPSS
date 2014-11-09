@@ -98,8 +98,8 @@ public class OrderInvoice implements Serializable
 	{
 		//Print the order breakdown & dateTime from Order object
 		System.out.println("=====================================================================================================================");
-		System.out.println(String.format("                                               ORDER INVOICE #%-5d                                                 ", order.getId()));
-		System.out.println(String.format("                                                   TABLE #%-5d                                                     ", tableId));
+		System.out.println(String.format("                                                  ORDER INVOICE #%-5d                                                 ", order.getId()));
+		System.out.println(String.format("                                                      TABLE #%-5d                                                     ", tableId));
 		
 		order.printOrder();
 		System.out.println(String.format("%-75s: %-10.2f", "Total price", this.totalPrice));

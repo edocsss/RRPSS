@@ -72,7 +72,7 @@ public class RestaurantApp
 			Scanner sc = new Scanner(System.in);
 			
 			// TODO need to delete this part BEFORE submitting the code
-			/* 
+			/*
 			// Adding table
 			tableManager.addTable(2);
 			tableManager.addTable(4);
@@ -356,7 +356,7 @@ public class RestaurantApp
 						println("2. Update Set Package");
 						println("3. Remove Set Package");
 						println("4. Back");
-						println("Enter your choice: ");
+						print("Enter your choice: ");
 						
 						// Submenu selection
 						subChoice = sc.nextInt();
@@ -514,7 +514,7 @@ public class RestaurantApp
 							
 							// If the SetPackage object specified by the ID is successfully removed, return 1
 							// Otherwise, return -1
-							if (menu.removeAlaCarteById(id) == -1) {
+							if (menu.removeSetPackageById(id) == -1) {
 								println("Error: Set Package with ID: " + id + " does not exist!");
 							} else {
 								println("Set Package with ID: " + id + " has been removed from the Menu!");
@@ -774,7 +774,7 @@ public class RestaurantApp
 						menu.printMenu();
 						
 						// Removing AlaCarte items to the Order
-						print("Input AlaCarte IDs (space-separated) | Enter -1 to end: ");
+						println("Input AlaCarte IDs (space-separated) | Enter -1 to end: ");
 						while (sc.hasNextInt()) {
 							id = sc.nextInt();
 							
@@ -794,7 +794,7 @@ public class RestaurantApp
 						}
 						
 						// Removing AlaCarte items to the Order
-						print("Input SetPackage IDs (space-separated) | Enter -1 to end: ");
+						println("Input SetPackage IDs (space-separated) | Enter -1 to end: ");
 						while (sc.hasNextInt()) {
 							id = sc.nextInt();
 							
