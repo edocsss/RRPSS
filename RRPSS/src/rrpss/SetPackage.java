@@ -15,7 +15,9 @@ public class SetPackage extends Item {
 	}
 	
 	public void setAlaCartes(Vector<AlaCarte> alaCartes) {
-		this.alaCartes = alaCartes;
+		for (AlaCarte ac: alaCartes) {
+			this.alaCartes.add(ac);
+		}
 	}
 	
 	public void addAlaCarte(AlaCarte a) {

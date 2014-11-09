@@ -19,7 +19,7 @@ import java.io.*;
  * @author Edwin Candinegara
  *
  */
-public final class Database
+public class Database
 {
 	/**
 	 * Constructs nothing as this class does not have to be instantiated to read and write a serialized object.

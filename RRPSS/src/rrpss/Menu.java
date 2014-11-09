@@ -79,10 +79,7 @@ public class Menu implements Serializable {
 	}
 	
 	public void printMenu () {
-		//Something like toString -> like a breakdown of what has been ordered
-		// TODO account for long name & description
-		
-		// sort by type
+		// Sort by type
 		Collections.sort(alaCartes);
 		
 		System.out.println("                                                        MENU                                                         ");

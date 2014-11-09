@@ -341,7 +341,7 @@ public class Order implements Serializable
 	{
 		System.out.println("                                                       ORDER                                                         ");
 		System.out.println("=====================================================================================================================");
-		System.out.println(String.format("%-5sid: %-5s status: %-20s staff: %-20s Date/time: %-30s",
+		System.out.println(String.format("%-5sID: %-5s Status: %-20s Staff: %-20s Date/Time: %-30s",
 				" ", id, status, staff.getName(), getDateTimeString()));
 		System.out.println("=====================================================================================================================");
 		
