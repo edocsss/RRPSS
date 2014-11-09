@@ -30,7 +30,7 @@ public class ReservationManager implements Serializable {
 	 * Buffer time (in minutes) for {@link Reservation} to expire from its dateTime.
 	 * If BUFFER_TIME minutes have passed and no order has been made from that reserved table, then the reservation is set to be expired.
 	 */
-	private static final int BUFFER_TIME = 15;
+	private static final int BUFFER_TIME = 1;
 	
 	/**
 	 * Constructs the {@link ReservationManager} object

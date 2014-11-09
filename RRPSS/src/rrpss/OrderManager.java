@@ -70,6 +70,7 @@ public class OrderManager implements Serializable
 	{
 		int id = this.idCounter++;
 		Order o = new Order (id, dateTime, staff);
+		this.orders.add(o);
 		
 		// Return the Order object so that it can be stored into the allocated table attribute in RestaurantApp
 		return o; 

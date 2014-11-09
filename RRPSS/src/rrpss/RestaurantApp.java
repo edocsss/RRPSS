@@ -74,19 +74,19 @@ public class RestaurantApp
 			// TODO need to delete this part BEFORE submitting the code
 			/*
 			// Adding table
-			tableManager.addTable(2);
-			tableManager.addTable(4);
-			tableManager.addTable(8);
-			tableManager.addTable(10);
-			tableManager.addTable(5);
-			tableManager.addTable(4);
-			tableManager.addTable(8);
-			tableManager.addTable(8);
-			tableManager.addTable(6);
-			tableManager.addTable(5);
-			tableManager.addTable(10);
-			tableManager.addTable(12);
-			tableManager.addTable(2);
+			//tableManager.addTable(2);
+			//tableManager.addTable(4);
+			//tableManager.addTable(8);
+			//tableManager.addTable(10);
+			//tableManager.addTable(5);
+			//tableManager.addTable(4);
+			//tableManager.addTable(8);
+			//tableManager.addTable(8);
+			//tableManager.addTable(6);
+			//tableManager.addTable(5);
+			//tableManager.addTable(10);
+			//tableManager.addTable(12);
+			//tableManager.addTable(2);
 			tableManager.addTable(4);
 			tableManager.addTable(4);
 			
@@ -142,8 +142,8 @@ public class RestaurantApp
 			
 			// Variable Declaration
 			int choice = 0, subChoice = 0, subChoice2 = 0;
-			String name, description, type, membershipString, dateTimeString;
-			int id, tableId, staffId, quantity, contact, numPeople, reservationId, ret;
+			String name, description, type, membershipString, dateTimeString, contact;
+			int id, tableId, staffId, quantity, numPeople, reservationId, ret;
 			boolean membership = false;
 			double price;
 			Table table;
@@ -847,8 +847,7 @@ public class RestaurantApp
 					
 					// Input customer contact number
 					print("Contact: ");
-					contact = sc.nextInt();
-					sc.nextLine();
+					contact = sc.nextLine();
 					
 					// Create a new Customer object
 					customer = new Customer(name, id, membership, contact);
@@ -883,7 +882,7 @@ public class RestaurantApp
 					} 
 					// If not full, create the reservation
 					else {
-						reservationId = reservationManager.createReservation(customer, dateTime, table);
+						reservationId = reservationManager.createReservation(customer, (Calendar) dateTime.clone(), table);
 						
 						// Error checking
 						if (reservationId != -1) {
@@ -1009,6 +1008,8 @@ public class RestaurantApp
 							membership = false;
 						}
 						
+						table.setAvailability(true);
+						
 					} else {
 						membership = reservation.getCustomer().getMembership();
 						
@@ -1019,6 +1020,7 @@ public class RestaurantApp
 					// Close the order AND release the table
 					order.setStatus("Closed");
 					table.setOrder(null);
+					
 					
 					// Create Order Invoice
 					orderInvoice = orderInvoiceManager.createOrderInvoice(order, membership, tableId);
