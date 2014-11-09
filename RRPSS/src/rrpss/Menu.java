@@ -75,7 +75,7 @@ public class Menu implements Serializable {
 	public SetPackage getSetPackageById(int id) {
 		int numSetPackages = this.setPackages.size();
 		for (int i = 0; i < numSetPackages; i++) {
-			if (this.alaCartes.get(i).getId() == id) {
+			if (this.setPackages.get(i).getId() == id) {
 				return this.setPackages.get(i);
 			}
 		}
