@@ -138,6 +138,7 @@ public class RestaurantApp
 			staffManager.addStaff(new Staff("Yanhan", 123, "Male", "Staff"));
 			staffManager.addStaff(new Staff("Kenrick", 314, "Male", "Staff"));
 			staffManager.addStaff(new Staff("Deka", 324, "Female", "Staff"));
+			staffManager.addStaff(new Staff("Edwin", 053, "Male", "Staff"));
 			*/
 			
 			// Variable Declaration
