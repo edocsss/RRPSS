@@ -74,19 +74,19 @@ public class RestaurantApp
 			// TODO need to delete this part BEFORE submitting the code
 			/*
 			// Adding table
-			//tableManager.addTable(2);
-			//tableManager.addTable(4);
-			//tableManager.addTable(8);
-			//tableManager.addTable(10);
-			//tableManager.addTable(5);
-			//tableManager.addTable(4);
-			//tableManager.addTable(8);
-			//tableManager.addTable(8);
-			//tableManager.addTable(6);
-			//tableManager.addTable(5);
-			//tableManager.addTable(10);
-			//tableManager.addTable(12);
-			//tableManager.addTable(2);
+			tableManager.addTable(2);
+			tableManager.addTable(4);
+			tableManager.addTable(8);
+			tableManager.addTable(10);
+			tableManager.addTable(5);
+			tableManager.addTable(4);
+			tableManager.addTable(8);
+			tableManager.addTable(8);
+			tableManager.addTable(6);
+			tableManager.addTable(5);
+			tableManager.addTable(10);
+			tableManager.addTable(12);
+			tableManager.addTable(2);
 			tableManager.addTable(4);
 			tableManager.addTable(4);
 			
@@ -1060,10 +1060,10 @@ public class RestaurantApp
 				
 				// Save to database
 				// Always save any change in each iteration
-				//ret = Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");
-				//if (ret == -1) {
-				//	System.out.println("Error: The data is not successfully written to the Database!");
-				//}
+				ret = Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");
+				if (ret == -1) {
+					System.out.println("Error: The data is not successfully written to the Database!");
+				}
 
 			} while (1 <= choice && choice <= 10);
 			
