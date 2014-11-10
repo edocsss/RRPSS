@@ -3,12 +3,6 @@ package rrpss;
 import java.io.Serializable;
 import java.util.*;
 
-/*
- * advance booking: active -> checked-in -> finished
- * 		if no show, active -> expired (check table, reservation)
- * 
- * When allocateTable() is called, check expired reservation based on the reservation status and time 
- */
 /**
  * Stores information about a reservation of a {@link Restaurant}.
  * This class keeps track of the information of the date and time, table, id, status, and customer of the reservation.

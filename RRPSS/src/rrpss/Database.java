@@ -1,6 +1,8 @@
 package rrpss;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Stores and retrieves serialized {@link Restaurant} object. 
@@ -113,6 +115,10 @@ public class Database
 	 * 
 	 * <p>
 	 * If the {@link Restaurant} object passed in through the argument is null, return {@code -1}. 
+	 * <br>
+	 * In addition, this method also checks whether the "Database" folder exists. If the folder does not exist,
+	 * it creates the folder first in order to prevent IOException which may occur because it cannot find the 
+	 * correct folder.
 	 * </p>
 	 * 
 	 * <p>
@@ -144,6 +150,13 @@ public class Database
 		if (r == null)
 		{
 			return -1;
+		}
+		
+		// Check whether the folder "Database" exists
+		// If it does not exist, create a new folder with the name "Database" first
+		if (!Files.exists(Paths.get(path)))
+		{
+			new File("Database").mkdir();
 		}
 		
 		try

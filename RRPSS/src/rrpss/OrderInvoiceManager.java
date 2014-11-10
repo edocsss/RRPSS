@@ -39,7 +39,6 @@ public class OrderInvoiceManager implements Serializable  {
 		OrderInvoice oI = new OrderInvoice(order, membership, tableId);
 		orderInvoices.add(oI);
 		
-		// This returned object will be used to call printInvoice() -> directly from the RestaurantApp
 		return oI;
 	}
 

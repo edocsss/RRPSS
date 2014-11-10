@@ -1060,7 +1060,7 @@ public class RestaurantApp
 				
 				// Save to database
 				// Always save any change in each iteration
-				ret = Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");
+				ret = Database.writeRestaurantObject(r, "Database//" + r.getName() + ".ser");
 				if (ret == -1) {
 					System.out.println("Error: The data is not successfully written to the Database!");
 				}
@@ -1072,6 +1072,7 @@ public class RestaurantApp
 			
 		} else {
 			System.out.println("Error: Data is not succesfully fetched from the Database!");
+			System.out.println("Please make sure that the corresponding serial file exists!");
 		}
 	}
 }

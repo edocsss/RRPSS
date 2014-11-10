@@ -3,7 +3,7 @@ package rrpss;
 import java.io.Serializable;
 
 /**
- * Stores information about an item of a {@link Menu}, {@link AlaCarte} and {@link SetPackage}
+ * Stores information about an item of a {@link Menu}, {@link AlaCarte} and {@link SetPackage}.
  * @author Liu Liling
  * @see Serializable
  */

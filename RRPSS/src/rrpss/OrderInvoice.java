@@ -3,7 +3,7 @@ package rrpss;
 import java.io.Serializable;
 import java.util.HashMap;
 /**
- * Stores information about the order invoice in the {@link Restaurant}
+ * Stores information about the order invoice in the {@link Restaurant}.
  * This class will keep track of the purchase ({@link Order}) made by the {@link Customer},
  * calculate the final price ({@link #grandTotal} that {@link Customer} has to pay, and print
  * the order invoice (consist of {@link Order} details and price breakdown).
@@ -92,10 +92,6 @@ public class OrderInvoice implements Serializable
 	 */
 	private double grandTotal;
 	
-	// Before creating an OrderInvoice object, check whether the table is assigned (if it is not, then wrong tableNo)
-	// If the table is assigned, look whether there is an Active reservation having that tableNo
-	// If there is, retrieve the customer membership
-	// If not, it means the customer is a walk-in -> ask for input whether the customer has a membership
 	/**
 	 * Construct an {@link OrderInvoice} object.  This constructor will initialize
 	 * the attributes of {@link OrderInvoice}.
@@ -231,7 +227,6 @@ public class OrderInvoice implements Serializable
 	 */
 	public void printInvoice ()
 	{
-		//Print the order breakdown & dateTime from Order object
 		System.out.println("=====================================================================================================================");
 		System.out.println(String.format("                                                  ORDER INVOICE #%-5d                                                 ", order.getId()));
 		System.out.println(String.format("                                                      TABLE #%-5d                                                     ", tableId));

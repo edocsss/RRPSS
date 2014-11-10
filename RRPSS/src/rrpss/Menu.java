@@ -3,7 +3,8 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Vector;
 /**
- * Manages the {@link AlaCarte} and {@link SetPackage} of the {@link Menu} by providing accessor(get methods) of the list of List of alaCarte & setPackage, and individual alaCarte & setPackage,
+ * Manages the {@link AlaCarte} and {@link SetPackage} of the {@link Menu}.  This class provides accessor (get methods) 
+ * of the list of List of alaCarte & setPackage, and individual alaCarte & setPackage,
  * various methods to add new alaCartes/setPackages and remove existing alaCartes/setPackages.
  * @author Liu Liling
  * @see Serializable
@@ -68,8 +69,8 @@ public class Menu implements Serializable {
 	}
 	
 	/**
-    * Using setPackage id to retreive a single {@link SetPackage} object from the menu.
-    * @param  id   the setPackage id to be retreived.
+    * Using setPackage id to retrieve a single {@link SetPackage} object from the menu.
+    * @param  id   the setPackage id to be retrieved.
     * @return {@link SetPackage} object of given id.
     */	
 	public SetPackage getSetPackageById(int id) {
