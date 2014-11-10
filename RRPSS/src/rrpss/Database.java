@@ -117,7 +117,7 @@ public class Database
 	 * If the {@link Restaurant} object passed in through the argument is null, return {@code -1}. 
 	 * <br>
 	 * In addition, this method also checks whether the "Database" folder exists. If the folder does not exist,
-	 * it creates the folder first in order to prevent IOException which may occur because it cannot find the 
+	 * it creates the folder first in order to prevent {@code IOException} which may occur because it cannot find the 
 	 * correct folder.
 	 * </p>
 	 * 
