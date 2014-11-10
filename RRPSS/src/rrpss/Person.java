@@ -34,9 +34,9 @@ public class Person implements Serializable
 	}
 	
 	/**
-	 * Set the {@link #name} attribute with the specified string argument 
+	 * Sets the {@link Person#name name} attribute with the specified string argument 
 	 * 
-	 * @param name String used to set the {@link #name} attribute 
+	 * @param name String used to set the {@link Person#name name} attribute 
 	 */
 	public void setName (String name)
 	{
@@ -44,9 +44,9 @@ public class Person implements Serializable
 	}
 	
 	/**
-	 * Set the {@link #id} attribute with the specified value 
+	 * Sets the {@link Person#id} attribute with the specified value 
 	 * 
-	 * @param id An integer used to set the {@link #id} attribute 
+	 * @param id An integer used to set the {@link Person#id id} attribute 
 	 */
 	public void setId (int id)
 	{
@@ -54,9 +54,9 @@ public class Person implements Serializable
 	}
 	
 	/**
-	 * Returns the {@link #name} of this object
+	 * Returns the {@link Person#name name} of this object
 	 * 
-	 * @return the {@link #name} of this object 
+	 * @return the {@link Person#name name} of this object 
 	 */
 	public String getName ()
 	{
@@ -64,9 +64,9 @@ public class Person implements Serializable
 	}
 	
 	/** 
-	 * Returns the {@link #id} of this object 
+	 * Returns the {@link Person#id id} of this object 
 	 * 
-	 * @return the {@link #id} of this object 
+	 * @return the {@link Person#id id} of this object 
 	 */
 	public int getId ()
 	{
