@@ -52,7 +52,7 @@ public class RestaurantApp
 		Restaurant r = new Restaurant("The Lyked");
 		
 		// Read data from Database
-		r = Database.readRestaurantObject("Database//" + r.getName() + ".ser");
+		//r = Database.readRestaurantObject("Database//" + r.getName() + ".ser");
 		
 		// Only start the program if the initial data has been successfully fetched from Database
 		if (r != null) {
@@ -75,20 +75,20 @@ public class RestaurantApp
 			/*
 			// Adding table
 			tableManager.addTable(2);
-			tableManager.addTable(4);
-			tableManager.addTable(8);
-			tableManager.addTable(10);
-			tableManager.addTable(5);
-			tableManager.addTable(4);
-			tableManager.addTable(8);
-			tableManager.addTable(8);
-			tableManager.addTable(6);
-			tableManager.addTable(5);
-			tableManager.addTable(10);
-			tableManager.addTable(12);
 			tableManager.addTable(2);
 			tableManager.addTable(4);
 			tableManager.addTable(4);
+			tableManager.addTable(4);
+			tableManager.addTable(4);
+			tableManager.addTable(4);
+			tableManager.addTable(4);
+			tableManager.addTable(6);
+			tableManager.addTable(8);
+			tableManager.addTable(8);
+			tableManager.addTable(8);
+			tableManager.addTable(10);
+			tableManager.addTable(10);
+			tableManager.addTable(10);
 			
 			// Adding AlaCarte
 			menu.addAlaCarte(new AlaCarte("Hummus and Crackers", 10.5, "Hummus with raw vegan crackers", "Appetizers")); // ID: 1
