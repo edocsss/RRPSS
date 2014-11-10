@@ -61,7 +61,11 @@ public class SetPackage extends Item {
 	 */
 	public SetPackage copy() {
 		SetPackage sp = new SetPackage(name, price, description);
-		sp.setAlaCartes(alaCartes);
+		
+		for (AlaCarte a: alaCartes) {
+			sp.addAlaCarte(a.copy());
+		}
+	
 		sp.setId(this.id); 
 		return sp;
 	}
