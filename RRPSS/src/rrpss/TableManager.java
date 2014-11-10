@@ -54,7 +54,7 @@ public class TableManager implements Serializable {
 	/**
 	 * Using table id (table number) to retreive a single {@link Table} object from the manager.
 	 * @param id	the table id (or table number) to be retreived.
-	 * @return	a {@Table} object of given id.
+	 * @return	a {@link Table} object of given id.
 	 */
 	public Table getTableById (int id) {
 		for (Table curTable: tables) {

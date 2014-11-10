@@ -170,7 +170,7 @@ public class Order implements Serializable
 	 * 
 	 * @param 	itemId	The ID of the {@link AlaCarte} object to be removed (should be an ID of an existing {@link AlaCarte}
 	 * 					object)
-	 * @return			{@code 1} if the targeted {@link AlaCArte} object is successfully removed
+	 * @return			{@code 1} if the targeted {@link AlaCarte} object is successfully removed
 	 * 					or {@code -1} otherwise
 	 */
 	public int removeAlaCarteByItemId (int itemId)
@@ -210,7 +210,7 @@ public class Order implements Serializable
 	 * If it is not, then this method create a new entry in {@link #setPackages} attribute with the specified quantity.
 	 * </p>
 	 * 
-	 * @param alaCarte	An {@link SetPackage} object which is added to {@link #setPackages}
+	 * @param setPackage	An {@link SetPackage} object which is added to {@link #setPackages}
 	 * @param quantity	An integer indicating the quantity of the ordered item (must be a positive integer)
 	 */ 
 	public void addSetPackage (SetPackage setPackage, int quantity)
@@ -259,7 +259,7 @@ public class Order implements Serializable
 	 * 
 	 * @param itemId 	(should be an ID of an existing {@link SetPackage}
 	 * 				  	object)
-	 * @return			{@code 1} if the targeted {@link AlaCArte} object is successfully removed
+	 * @return			{@code 1} if the targeted {@link AlaCarte} object is successfully removed
 	 * 					or {@code -1} otherwise
 	 */
 	public int removeSetPackageByItemId (int itemId)

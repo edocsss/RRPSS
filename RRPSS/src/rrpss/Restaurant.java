@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Represents a restaurant in real life. A restaurant would have
  * a restaurant name, menu and able to manage orders {@link OrderManager}, 
  * order invoices {@link OrderInvoiceManager}, reservation
- * {@link ReservationManager}, table {@link TableManage} and staff {@StaffManager}.
+ * {@link ReservationManager}, table {@link TableManager} and staff {@link StaffManager}.
  * 
  * @author Deka Auliya Akbar
  * @see Serializable

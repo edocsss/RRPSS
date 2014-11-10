@@ -1,7 +1,8 @@
 package rrpss;
+
 /**
  * Stores information about a single alaCarte, particularly used in context of a menu.
- * This class stores the name, price, description and type of alaCarte {@link menu}.
+ * This class stores the name, price, description and type of alaCarte {@link Menu}.
  * @author Liu Liling
  * @see    Comparable
  */
@@ -33,7 +34,7 @@ public class AlaCarte extends Item implements Comparable<AlaCarte> {
 	
 	/**
     * Sets the type of alaCarte
-    * @param type of alaCarte
+    * @param type	type of alaCarte
     */	
 	public void setType(String type) {
 		this.type = type;

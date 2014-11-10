@@ -20,7 +20,6 @@ public class StaffManager implements Serializable {
 	/**
 	 * Constructs a {@link StaffManager} object with a list of {@link Staff} 
 	 * 
-	 * @param staffs Identity of staffs working in this Restaurant 
 	 */
 	public StaffManager ()
 	{
@@ -30,7 +29,7 @@ public class StaffManager implements Serializable {
 	/**
 	 * Returns a {@link Staff} object by using the {@link Person#id id} of {@link Staff} 
 	 * 
-	 * @param staffId Id of Staff 
+	 * @param staffId Identity of staffs working in this Restaurant 
 	 * @return a {@link Staff} object by using the {@link Person#id id} of {@link Staff} 
 	 */
 	public Staff getStaffById (int staffId)

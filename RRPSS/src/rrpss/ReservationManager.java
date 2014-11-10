@@ -22,7 +22,7 @@ public class ReservationManager implements Serializable {
 	
 	/**
 	 * Identifier (id) counter of the reservations, used to assign a unique id for new reservation.
-	 * The value is one more than the size of {@link ReservationManager#reservaions reservations} vector.
+	 * The value is one more than the size of {@link ReservationManager#reservations reservations} vector.
 	 */
 	private int idCounter;
 	
@@ -102,7 +102,7 @@ public class ReservationManager implements Serializable {
 	 * <p>This method is being used to get {@link Customer#membership}
 	 * when {@link OrderInvoice#printInvoice()} is called</p>
 	 * 
-	 * @param tableId	{@link Table#tableId id} of a table (table number).
+	 * @param tableId	{@link Table#id id} of a table (table number).
 	 * @param status	status of the reservation.
 	 * @return	{@link Reservation} object that being allocated to a specified table
 	 * with a specified reservation status; {@code null} if not found.
@@ -119,7 +119,7 @@ public class ReservationManager implements Serializable {
 	/**
 	 * Checks the current reservation by first checking the expiration of all reservations
 	 * (by calling {@link ReservationManager#checkExpiry() checkExpiry})
-	 * and then gets the {@link Reservation} object by its id (by calling {@link ReservationManager#getReservationById() getReservationById}).
+	 * and then gets the {@link Reservation} object by its id (by calling {@link ReservationManager#getReservationById(int reservationId) getReservationById}).
 	 * Finally prints the {@link Reservation} object (by calling {@link Reservation#printReservation()})
 	 * 
 	 * <p>Returns 1 on successful printing, -1 otherwise</p>

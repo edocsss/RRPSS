@@ -3,7 +3,7 @@ package rrpss;
 import java.util.Vector;
 /**
  * Stores information about a single setPackage, particularly used in context of a menu.
- * This class stores the name, price, description of setPackage {@link menu}.
+ * This class stores the name, price, description of setPackage {@link Menu}.
  * various methods to add new alaCartes/setPackages and remove existing alaCartes/setPackages.
  * @author Liu Liling
  */
@@ -33,7 +33,7 @@ public class SetPackage extends Item {
 	
     /**
      * Set alaCartes for this setPackage.
-     * @param alaCarte of this setPackage.
+     * @param alaCartes of this setPackage.
      */
 	public void setAlaCartes(Vector<AlaCarte> alaCartes) {
 		this.alaCartes = alaCartes;

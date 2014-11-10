@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Vector;
 /**
- * Manages the {@link alaCartes} and {@link setPackages} of the {@link menu} by providing accessor(get methods) of the list of List of alaCarte & setPackage, and individual alaCarte & setPackage,
+ * Manages the {@link AlaCarte} and {@link SetPackage} of the {@link Menu} by providing accessor(get methods) of the list of List of alaCarte & setPackage, and individual alaCarte & setPackage,
  * various methods to add new alaCartes/setPackages and remove existing alaCartes/setPackages.
  * @author Liu Liling
  * @see Serializable
@@ -11,17 +11,17 @@ import java.util.Vector;
 public class Menu implements Serializable {
     /**
      * List of alaCarte and setPackage, implemented in {@link Vector} data structure.
-     * Each entry consists of a reference to existing {@link alaCartes}/{@link setPackages}object.
+     * Each entry consists of a reference to existing {@link AlaCarte}/{@link SetPackage}object.
      */
 	private Vector <AlaCarte> alaCartes;
 	
     /**
-     * Id of alaCartes, which is equal to the size of {@link Menu#alaCarte alaCartes} vector.
+     * Id of alaCartes, which is equal to the size of {@link Menu#alaCartes alaCartes} vector.
      */
 	private Vector <SetPackage> setPackages;   
 	
     /**
-     * Id of setPackages, which is equal to the size of {@link Menur#setPackage setPackages} vector.
+     * Id of setPackages, which is equal to the size of {@link Menu#setPackages setPackages} vector.
      */
 	private int idCounter;
 	
@@ -52,9 +52,9 @@ public class Menu implements Serializable {
 	}
 	
 	 /**
-     * Using alaCarte id to retreive a single {@link alaCarte} object from the menu.
+     * Using alaCarte id to retreive a single {@link AlaCarte} object from the menu.
      * @param  id   the alaCarte id to be retreived.
-     * @return {@AlaCarte} object of given id.
+     * @return {@link AlaCarte} object of given id.
      */	
 	public AlaCarte getAlaCarteById(int id) {
 		int numAlaCartes = this.alaCartes.size();
@@ -68,9 +68,9 @@ public class Menu implements Serializable {
 	}
 	
 	/**
-    * Using setPackage id to retreive a single {@link setPackage} object from the menu.
+    * Using setPackage id to retreive a single {@link SetPackage} object from the menu.
     * @param  id   the setPackage id to be retreived.
-    * @return {@SetPackage} object of given id.
+    * @return {@link SetPackage} object of given id.
     */	
 	public SetPackage getSetPackageById(int id) {
 		int numSetPackages = this.setPackages.size();
