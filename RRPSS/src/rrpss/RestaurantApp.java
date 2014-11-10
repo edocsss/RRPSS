@@ -770,8 +770,8 @@ public class RestaurantApp
 						
 					case 2:
 						
-						// Print menu
-						menu.printMenu();
+						// Print order
+						order.printOrder();
 						
 						// Removing AlaCarte items to the Order
 						println("Input AlaCarte IDs (space-separated) | Enter -1 to end: ");
@@ -1060,10 +1060,10 @@ public class RestaurantApp
 				
 				// Save to database
 				// Always save any change in each iteration
-				ret = Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");
-				if (ret == -1) {
-					System.out.println("Error: The data is not successfully written to the Database!");
-				}
+				//ret = Database.writeRestaurantObject(r, "Database\\" + r.getName() + ".ser");
+				//if (ret == -1) {
+				//	System.out.println("Error: The data is not successfully written to the Database!");
+				//}
 
 			} while (1 <= choice && choice <= 10);
 			
