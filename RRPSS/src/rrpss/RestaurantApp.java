@@ -52,7 +52,7 @@ public class RestaurantApp
 		Restaurant r = new Restaurant("The Lyked");
 		
 		// Read data from Database
-		//r = Database.readRestaurantObject("Database//" + r.getName() + ".ser");
+		r = Database.readRestaurantObject("Database//" + r.getName() + ".ser");
 		
 		// Only start the program if the initial data has been successfully fetched from Database
 		if (r != null) {
