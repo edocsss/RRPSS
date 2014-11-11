@@ -325,12 +325,23 @@ public class Order implements Serializable
 	 * @return A formatted String representing {@link #dateTime}
 	 */
 	public String getDateTimeString() {
+		int hour = this.dateTime.get(Calendar.HOUR_OF_DAY);
+		int minute = this.dateTime.get(Calendar.MINUTE);
+		String hourStr = "" + hour;
+		String minuteStr = "" + minute;
+		
+		if (hour < 10) {
+			hourStr = "0" + hourStr;
+		}
+		
+		if (minute < 10) {
+			minuteStr = "0" + minuteStr;
+		}
+		
 		return this.dateTime.get(Calendar.DAY_OF_MONTH) + " "
 				+ this.dateTime.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH) + " "
 				+ this.dateTime.get(Calendar.YEAR) + ", "
-				+ this.dateTime.get(Calendar.HOUR_OF_DAY) + ":"
-				+ this.dateTime.get(Calendar.MINUTE) + ":"
-				+ this.dateTime.get(Calendar.SECOND);
+				+ hourStr + ":" + minuteStr;
 	}
 	
 	/**

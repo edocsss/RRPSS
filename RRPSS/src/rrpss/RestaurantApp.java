@@ -1064,7 +1064,7 @@ public class RestaurantApp
 				if (ret == -1) {
 					System.out.println("Error: The data is not successfully written to the Database!");
 				}
-
+				
 			} while (1 <= choice && choice <= 10);
 			
 			// Close Scanner object
