@@ -161,16 +161,16 @@ public class RestaurantApp
 				println("=================================================");
 				println("Restaurant Reservation and Point of Sale System: ");
 				println("=================================================");
-				println("1. Create/Update/Remove menu item");
-				println("2. Create/Update/Remove promotion");
-				println("3. Create order");
-				println("4. View order");
-				println("5. Add/Remove order item/s to/from order");
-				println("6. Create reservation booking");
-				println("7. Check/Remove reservation booking");
-				println("8. Check table availability");
-				println("9. Print order invoice");
-				println("10. Print sale revenue report by period (eg day or month)");
+				println("1. Create/Update/Remove Ala Carte Item");
+				println("2. Create/Update/Remove Set Package Item");
+				println("3. Create Order");
+				println("4. View Order");
+				println("5. Add/Remove Order Item/s to/from Order");
+				println("6. Create Reservation Booking");
+				println("7. Check/Remove Reservation Booking");
+				println("8. Check Table Availability");
+				println("9. Print Order Invoice");
+				println("10. Print Sale Revenue Report by Period (eg day or month)");
 				println("11. Exit");
 				print("Enter your choice: ");
 				
@@ -559,13 +559,12 @@ public class RestaurantApp
 						}
 					} else {
 						// Update Reservation status to "Checked-in" as it means the customer has checked in to the restaurant
-						reservation.setStatus("checked-in");
+						reservation.setStatus("Checked-In");
 					}
 					
 					// If the Table object has already had an Order, it means error
 					if (table.getOrder() != null) {
-						println("Error: Table number " + tableId + " has already had an order!");
-						println("Please use the update function to update this order!");
+						println("Error: Table number " + tableId + " has already had an order!\n");
 						continue;
 					}
 					
@@ -976,7 +975,7 @@ public class RestaurantApp
 					
 					// The table must be assigned if it wants to print the order invoice
 					if (table.getAvailability()) {
-						println("Error: Table number: " + tableId + " does not have customer!\n");
+						println("Error: Table number " + tableId + " does not have customer!\n");
 						continue;
 					}
 	
