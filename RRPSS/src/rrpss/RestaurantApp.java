@@ -738,8 +738,10 @@ public class RestaurantApp
 								// Use copy() method in order to preserve the information although the item has been removed
 								// from the menu
 								order.addAlaCarte(ac.copy(), quantity);
+								println("Ala Carte with ID: " + id + " has been added to the order!");
 							}
 						}
+						
 						// Adding SetPackage items to the Order
 						println("Input SetPackage IDs and quantity (space-separated) | Enter -1 to end: ");
 						while (sc.hasNextInt()) {
@@ -763,6 +765,7 @@ public class RestaurantApp
 								// Use copy() method in order to preserve the information although the item has been removed
 								// from the menu
 								order.addSetPackage(sp.copy(), quantity);
+								println("Set Package with ID: " + id + " has been added to the order!");
 							}
 						}
 						
@@ -815,6 +818,13 @@ public class RestaurantApp
 						}
 						
 						break;
+					}
+					
+					// Check whether the order is empty (does not have any Ala Carte and Set Package item)
+					// If it is, then it is just an empty order and therefore it can be deleted
+					// by setting the order into null
+					if (order.getAlaCartes().isEmpty() && order.getSetPackages().isEmpty()) {
+						table.setOrder(null);
 					}
 					
 					break;
@@ -984,7 +994,7 @@ public class RestaurantApp
 					
 					// Error checking
 					if (order == null) {
-						println("Error: Table number " + tableId + " does not have any order!");
+						println("Error: Table number " + tableId + " does not have any order!\n");
 						continue;
 					}
 					
