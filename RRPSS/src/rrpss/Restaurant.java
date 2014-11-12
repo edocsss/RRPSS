@@ -3,16 +3,14 @@ package rrpss;
 import java.io.Serializable;
 
 /**
- * Represents a restaurant in real life. A restaurant would have
- * a restaurant name, menu and able to manage orders {@link OrderManager}, 
- * order invoices {@link OrderInvoiceManager}, reservation
- * {@link ReservationManager}, table {@link TableManager} and staff {@link StaffManager}.
+ * This class represents a restaurant. A restaurant would have
+ * a restaurant name ({@link #name}), menu ({@link Menu}) and able to manage orders ({@link Order}), 
+ * order invoices ({@link OrderInvoice}), reservations ({@link Reservation}), tables ({@link Table})and staffs ({@link Staff}).
  * 
  * @author Deka Auliya Akbar
  * @see Serializable
  * 
  */
-
 
 public class Restaurant implements Serializable {
 	
@@ -22,51 +20,55 @@ public class Restaurant implements Serializable {
 	private String name;
 	
 	/**
-	 * The menu of this restaurant. {@link Menu} is consist of {@link AlaCarte} (standalone menu item)
-	 * and  {@link SetPackage} which is the combination of AlaCarte. {@link Menu} will be able to return
-	 * both {@link AlaCarte} and {@link SetPackage} objects, add new menu item (either {@link AlaCarte} or 
-	 * {@link SetPackage} ), remove menu item (either {@link Menu} or {@link SetPackage}) and print
-	 * all menu items 
+	 * Stores menu items ({@code AlaCarte} and {@code SetPackage}) of this restaurant.
+	 * <p>A menu object consists of:
+	 * <ul>
+	 * <li>{@link AlaCarte}, the standalone menu item</li>
+	 * <li>{@link SetPackage}, the combination of AlaCarte items</li>
+	 * </ul>
+	 * {@link Menu} will be able to return both {@code AlaCarte} and {@code SetPackage} objects,
+	 * add new menu item, remove menu item and print all menu items 
 	 * 
 	 */
 	private Menu menu;
 	
 	/**
 	 * Manages orders in the restaurant. {@link OrderManager} is able to create order from the customer
-	 * and returns the order object.
+	 * and returns the {@code order} object.
 	 */
 	private OrderManager orderManager;
 	
 	/**
-	 * Manages order invoices in the restaurant. {@link OrderInvoiceManager} will be able to create order 
-	 * invoices and return the {@link OrderInvoice} object.
+	 * Manages order invoices in the restaurant. {@link OrderInvoiceManager} is able to create order 
+	 * invoices and return the {@code OrderInvoice} object.
 	 */
 	private OrderInvoiceManager orderInvoiceManager;
 	
 	/**
-	 * Manages reservations in the restaurant. {@link ReservationManager} will be able to keep track of 
-	 * reservations, create reservation, check reservation, check reservation expiry and cancel reservation.
+	 * Manages reservations in the restaurant. {@link ReservationManager} is able to keep track of 
+	 * the reservations, create reservation, check reservation including the reservation expiry and cancel
+	 * reservation.
 	 */
 	private ReservationManager reservationManager;
 	
 	/**
-	 * Manages tables in the restaurant. {@link TableManager} will be able to get the list of tables,
+	 * Manages tables in the restaurant. {@link TableManager} is able to get the list of tables,
 	 * get its individual {@link Table} object, add new table, remove existing table, and allocate table
 	 * for the customer.
 	 */
 	private TableManager tableManager;
 	
 	/**
-	 * Manages the staffs in the restaurant. {@link StaffManager} will be able to get the staff by his/her id,
+	 * Manages the staffs in the restaurant. {@link StaffManager} is able to get the staff by his/her id,
 	 * add new staff and remove existing staff. 
 	 */
 	private StaffManager staffManager;
 	
 	/**
-	 * Constructs an {@code Restaurant} object, set {@link #name} as the restaurant name and initialize the
-	 * these attributes : {@code orderManager}, {@code orderInvoiceManager}, {@code reservationManager},
-	 * {@code tableManager}, and {@code staffManager}
-	 * @param name is the name of the restaurant
+	 * Constructs a {@code Restaurant} object, sets {@code name} as the restaurant name and initialize these attributes:
+	 * <p>
+	 * {@code orderManager}, {@code orderInvoiceManager}, {@code reservationManager}, {@code tableManager}, and {@code staffManager}
+	 * @param name name of the restaurant
 	 */
 	public Restaurant(String name) {
 		this.name = name;
@@ -77,16 +79,17 @@ public class Restaurant implements Serializable {
 		this.tableManager = new TableManager();
 		this.staffManager = new StaffManager();
 	}
+	
 	/**
-	 * Gets the name of the restaurant
-	 * @return the name of the restaurant
+	 * Gets the {@code Name} of the restaurant
+	 * @return name of the restaurant
 	 */
 	public String getName() {
 		return this.name;
 	}
 	
 	/**
-	 * Gets the menu object of the restaurant
+	 * Gets the {@code Menu} object of the restaurant
 	 * @return menu object of the restaurant
 	 */
 	public Menu getMenu() {
@@ -94,7 +97,7 @@ public class Restaurant implements Serializable {
 	}
 	
 	/**
-	 * Gets the order manager object of the restaurant
+	 * Gets the {@code OrderManager} object of the restaurant
 	 * @return OrderManager object of the restaurant
 	 */
 	public OrderManager getOrderManager() {
@@ -102,7 +105,7 @@ public class Restaurant implements Serializable {
 	}
 	
 	/**
-	 * Gets the order invoice manager object of the restaurant
+	 * Gets the {@code OrderInvoiceManager} object of the restaurant
 	 * @return OrderInvoiceManager object of the restaurant 
 	 */
 	public OrderInvoiceManager getOrderInvoiceManager() {
@@ -110,7 +113,7 @@ public class Restaurant implements Serializable {
 	}
 	
 	/**
-	 * Gets the reservation manager object of the restaurant
+	 * Gets the {@code ReservationManager} object of the restaurant
 	 * @return ReservationManager object of the restaurant
 	 */
 	public ReservationManager getReservationManager() {
@@ -119,7 +122,7 @@ public class Restaurant implements Serializable {
 	
 	
 	/**
-	 * Gets the table manager object of the restaurant
+	 * Gets the {@code TableManager} object of the restaurant
 	 * @return TableManager object of the restaurant
 	 */
 	public TableManager getTableManager() {
@@ -128,7 +131,7 @@ public class Restaurant implements Serializable {
 	
 	
 	/**
-	 * Gets the staff manager object of the restaurant
+	 * Gets the {@code StaffManager} object of the restaurant
 	 * @return StaffManager object of the restaurant
 	 */
 	public StaffManager getStaffManager() {

@@ -2,108 +2,103 @@ package rrpss;
 
 import java.io.Serializable;
 import java.util.HashMap;
+
 /**
- * Stores information about the order invoice in the {@link Restaurant}.
- * This class will keep track of the purchase ({@link Order}) made by the {@link Customer},
- * calculate the final price ({@link #grandTotal} that {@link Customer} has to pay, and print
- * the order invoice (consist of {@link Order} details and price breakdown).
- * 
- * Before finding the {@link #grandTotal}, {@link OrderInvoice}will first compute
- * the {@link #totalPrice}, which is the sum up the price of all items that Customer 
- * purchased (both {@link AlaCarte} and {@link SetPackage} are considered)
- * multiplied with its ordered quantity. At this stage, {@link #grandTotal} will be
- * made equal to {@link #totalPrice}.
- * 
- * Afterwards, {@link OrderInvoice} will check whether {@link Customer} is a 
- * member of the {@link Restaurant}.If yes, then the {@link Customer} will receive 10%
- * {@link #DISCOUNT} from the original {@link #grandTotal} and {@link #totalDiscount}
- * would be subtracted from the {@link #grandTotal}.
- * 
- * The final price, {@link #grandTotal} is then calculated by adding the {@link #totalGST} to 
- * {@link #totalPrice}. The {@link #GST} is obtained by multiplying 7% to {@link #grandTotal}
- *   
+ * Stores information of all order invoices in the restaurant.
+ * <p>
+ * This class will keep track of the purchases ({@link Order}) made by the customer,
+ * calculate the final price ({@link #grandTotal}), and print the order invoice which consist
+ * of {@code Order} details and price breakdown.
+ *
+ * <p>
+ * The price is broken down into:
+ * <ul>
+ * 	<li>{@code TotalPrice}: The price for all items that customer has to pay. This price is the sum of price x quantity
+ * of each item being ordered. 
+ * 	<li>{@code TotalGST}: Goods and service tax of 7%
+ * 	<li>{@code TotalDiscount}: 10% discount entitled to members of the restaurant.
+ * 	<li>{@code GrandTotal}: The amount that customer will pay. This final price take accounts the GST
+ * and membership discount.
+ * </ul>
+ *  
  * @author Deka Auliya Akbar
  * @see Serializable
  */
 public class OrderInvoice implements Serializable 
 {
 	/**
-	 * Is the tax rate for Goods and Services Tax. Here, the GST is 7% of the total purchase price
-	 * {@link #grandTotal}. The {@link #totalGST} will be added to the {@link #grandTotal}.
-	 * And the result is the amount of price a {@link Customer} has to pay. GST rate is constant, hence it is final.
+	 * Constant that represents the tax rate for Goods and Services Tax. The rate of this GST is 7%.
+	 * The {@link #totalGST} will be added to the {@link #grandTotal}.
 	 */
 	private static final double GST = 0.07;
 	
 	/**
-	 * Is the discount rate for members in the restaurant. Here, the Discount rate is 10% of the
-	 * total purchase price {@link #grandTotal}. The {@link #totalDiscount} will be subtracted
-	 * from the {@link #grandTotal} for all the members in the {@link Restaurant}.
-	 * Discount rate is fixed, therefore it is final.
-	 *  
+	 * Constant that represents the discount rate entitled for the members in the restaurant. The discount rate is 10%.
+	 * The {@link #totalDiscount} will be subtracted from the {@link #grandTotal} if a customer is a member in
+	 * the {@code Restaurant}. 
 	 */
 	private static final double DISCOUNT = 0.1;
 	
 	/**
-	 * Is the sum of all orders, which include both the price of {@link AlaCarte} and {@link SetPackage}
-	 * multiplied with corresponding requested quantities.
+	 * Stores the gross price of an order. This price is the sum of the costs of all items in exist the order.
+	 * The cost of each item is determined by multiplying the price of individual item with its requested quantities.
 	 */
 	private double totalPrice;
 	
 	/**
-	 * Is the order object that customer has requested. An order will contains menu item that a customer
-	 * purchased  ( {@link AlaCarte} and {@link SetPackage} ), date and time of the {@link Order} object
-	 * creation, the {@link Staff} object who created the {@link Order}. This object also has print 
-	 * method to print out the {@link Order} details.
-	 * 
+	 * Stores the {@link Order} object that customer has requested. This order will contain menu items that
+	 * the customer purchased  ({@link AlaCarte} and {@link SetPackage}) and its requested quantities, date and time of the
+	 * {@code Order} creation, and the staff who created the {@code Order}. This object also has a print method to print out its
+	 * details. 
 	 */
 	private Order order;
 
 	/**
-	 * Is the table identifier, to indicate from which {@link Table} the {@link Order} is made.
-	 * 
+	 * Stores the table number to indicate from which {@link Table} an {@code Order} is made.
 	 */
 	private int tableId;
 
 	/**
-	 * Specify whether a customer who ordered is a member of the {@link Restaurant}.
+	 * Stores the membership status of the {@code Customer}.
 	 * 
 	 */
 	private boolean membership;
 
 	/** 
-	 * {@link #totalDiscount} is the discounted amount of price to be subtracted from
+	 * Stores the discounted amount of price to be subtracted from
 	 * {@link #grandTotal}. It is calculated by multiplying {@link #DISCOUNT}
-	 * with {@link #grandTotal}.
+	 * with the {@code grandTotal}.
 	 * 
-	 * This totalDiscount will only be computed when the {@link Customer} is a member of the 
-	 * {@link Restaurant}
+	 * <p>This {@code totalDiscount} will only be computed if the {@code Customer} is a member of the 
+	 * {@link Restaurant}, otherwise the value is 0 (no discount).
+	 * </p>
 	 */
 	private double totalDiscount;
 
 	/**
-	 * {@link #totalGST} is the amount of tax to be added to the {@link #grandTotal}.
+	 * Stores the amount of tax to be added to the {@link #grandTotal}.
 	 * It is calculated by multiplying {@link #GST} with {@link #grandTotal}.
 	 */
 	private double totalGST;
-
+	
 	/**
-	 * {@link #grandTotal} is the final amount of price that a {@link Customer} hsa to pay.
-	 * This final price is calculated by adding the {@link #totalGST} to {@link #grandTotal}.
+	 * Stores the net price that a {@code Customer} has to pay.
+	 * This net price have already subtracted the discount {@code totalDiscount} and added with the GST {@code totalGST}.
 	 */
 	private double grandTotal;
 	
 	/**
-	 * Construct an {@link OrderInvoice} object.  This constructor will initialize
-	 * the attributes of {@link OrderInvoice}.
+	 * Constructs an {@link OrderInvoice} object.  This constructor will initialize
+	 * the attributes of {@code OrderInvoice}.
 	 * 
-	 * @param order 		is the {@link Order} objects, and assigned to {@link #order} at initialization 
-	 * @param membership 	is the status of customer membership in the restaurant
-	 * The membership status of a {@link Customer} could only either true or false, and assigned to {@link #membership} at initialization
-	 * @param tableId 		is the id of the {@link Table} object and assigned to {@link #tableId} at initialization
-	 * Each table has unique id to differentiate between different tables. This id is very similar to table number in real world.
-	 * {@link #totalPrice}, {@link #grandTotal}, {@link #totalGST} and {@link #totalDiscount} are initialized to 0
-	 * This constructor will call {@link #calculateTotalPrice()} to compute the total price that a customer must pay
-	 * after GST and membership discount
+	 * @param order 		is the {@code Order} objects, and assigned to {@link #order} at initialization 
+	 * @param membership 	is the membership status of a customer in the restaurant and assigned to
+	 * 						{@link #membership}
+	 * @param tableId 		is the identifier of the {@link Table} object and assigned to {@link #tableId}
+	 * 
+	 * <p>{@link #totalPrice}, {@link #grandTotal}, {@link #totalGST} and {@link #totalDiscount} are initialized to 0.
+	 * This constructor will evoke {@link #calculateTotalPrice()} to compute the cost that a customer has to pay.
+	 * </p>
 	 *
 	 * 
 	 */
@@ -121,16 +116,13 @@ public class OrderInvoice implements Serializable
 	}
 
 	/**
-	 * This method will calculate the {@link #totalPrice}, {@link #totalDiscount}, {@link #totalGST}
+	 * Calculates the {@link #totalPrice}, {@link #totalDiscount}, {@link #totalGST}
 	 * and {@link #grandTotal}.
 	 * 
-	 * It will iterate through all the menu item exist in the {@link Order} object, which is 
-	 * stored in HashMap data structures, which exist for both {@link AlaCarte} and {@link SetPackage}. 
-	 * For each item, the price will be multiplied with the requested quantity and the result is added up
-	 * to the {@link #totalPrice}. 
-	 * 
-	 * {@link #grandTotal} is computed by subtracting {@link #totalDiscount} if {@link Customer} is a 
-	 * member of the {@link Restaurant} and adding the {@link #totalGST}.
+	 * <p>This method iterates through every menu item exists in the {@link Order} object, which are 
+	 * stored in {@code HashMap} data structures. For each item, the price will be multiplied with the requested quantity
+	 * and the result is added up to the gross price ({@code totalPrice}). 
+	 * <p>The net price ({@code grandTotal}) is computed by subtracting {@code totalDiscount} and adding the {@code totalGST}.
 	 *
 	 */
 	public void calculateTotalPrice ()
@@ -174,8 +166,8 @@ public class OrderInvoice implements Serializable
 	}
 	
 	/**
-	 * Returns {@link Order} object from the {@link Customer}.
-	 * @return	{@link Order} object requested by the {@link Customer}.
+	 * Returns {@link Order} object requested by the {@code Cusomer}.
+	 * @return	{@link Order} object made by the customer.
 	 */
 	public Order getOrder ()
 	{
@@ -184,8 +176,8 @@ public class OrderInvoice implements Serializable
 
 	
 	/**
-	 * Returns the {@link #totalPrice} of all items purchased/ordered.
-	 * @return the {@link #totalPrice} of the purchase.
+	 * Returns the total price (gross price) of all items purchased/ordered.
+	 * @return the {@code totalPrice} of the purchase.
 	 */
 	public double getTotalPrice ()
 	{
@@ -193,8 +185,7 @@ public class OrderInvoice implements Serializable
 	}
 
 	/**
-	 * Returns the {@link #totalDiscount}, the value is 0 if the {@link Customer}
-	 * is not a member of the {@link Restaurant} 
+	 * Returns the discounted amount, the value is 0 if the {@link Customer} is not a member. 
 	 * @return the total discount.
 	 */
 	public double getTotalDiscount() {
@@ -202,7 +193,7 @@ public class OrderInvoice implements Serializable
 	}
 
 	/**
-	 * Returns the {@link #totalGST} of the purchase.
+	 * Returns the GST of the purchase.
 	 * @return the total tax
 	 */
 	public double getTotalGST() {
@@ -210,19 +201,18 @@ public class OrderInvoice implements Serializable
 	}
 	
 	/**
-	 * Returns the {@link #grandTotal}, which is the final amount of price 
-	 * {@link Customer} has to pay.
-	 * @return {@link #grandTotal} of an {@link Order}.
+	 * Returns the net price, which is the final amount of price the {@link Customer} has to pay.
+	 * @return {@code grandTotal} of an {@code Order} object.
 	 */
 	public double getGrandTotal() {
 		return this.grandTotal;
 	}
 
 	/**
-	 * This method will print the Order details, which breakdown of each menu item and the quantity
-	 * that {@link Customer} purchase, the date and time when the {@link Order}is created,
-	 * and also display the price breakdown, from the {@link #totalPrice}, membership {@link #totalDiscount},
-	 * {@link #totalGST}, and the final amount, {@link #grandTotal}.
+	 * Prints the {@link Order} details. This method prints every menu item and the respective quantity that the {@code Customer}
+	 * has ordered, the date and time when the {@code Order} is created, and display the price breakdown, which consists of 
+	 * the gross price ({@link #totalPrice}), membership discount ({@link #totalDiscount}),
+	 * tax({@link #totalGST}), and the net price ({@link #grandTotal}).
 	 * 
 	 */
 	public void printInvoice ()
