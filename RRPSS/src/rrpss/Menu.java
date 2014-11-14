@@ -159,8 +159,10 @@ public class Menu implements Serializable {
 			System.out.println(String.format("%-5s%-35s%-10.2f%-50s",
 					sp.id, sp.name, sp.price, sp.description));
 			for (AlaCarte ac: sp.getAlaCartes()) {
-				System.out.println(String.format("%-5s%-5s%-40s%-50s%-15s",
+				if (this.alaCartes.contains(ac)) {
+				    System.out.println(String.format("%-5s%-5s%-40s%-50s%-15s",
 						" ", ac.id, ac.name, ac.description, ac.getType()));
+				}
 			}
 		}
 		
