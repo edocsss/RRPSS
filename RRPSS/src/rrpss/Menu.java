@@ -162,6 +162,8 @@ public class Menu implements Serializable {
 				if (this.alaCartes.contains(ac)) {
 				    System.out.println(String.format("%-5s%-5s%-40s%-50s%-15s",
 						" ", ac.id, ac.name, ac.description, ac.getType()));
+				} else {
+					sp.removeAlaCarte(ac);
 				}
 			}
 		}
