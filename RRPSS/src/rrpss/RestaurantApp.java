@@ -550,6 +550,9 @@ public class RestaurantApp
 					 *  	- If it is available, it means the customer is a walk-in customer
 					 *  	- If it is not available, it means the Table has been assigned to other customers
 					 */
+					
+					// Check for any expired reservations
+					reservationManager.checkExpiry();
 	
 					reservation = reservationManager.getReservationByTableId(tableId, "Active");
 					if (reservation == null) {
